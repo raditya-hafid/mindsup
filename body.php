@@ -151,27 +151,23 @@
 
                 <div class="row justify-content-md-center">
                     <div class="col-md-3 rounded panel-course">
-                        <img src="../asset/children.jpg" width="100%" height="auto" alt="...">
-                        <h5 style="font-size: 22px; margin-top: 12px;">Course Name 1</h5>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <img src="..\asset\matematika.png" width="100%" height="auto" alt="...">
+                        <h5 style="font-size: 22px; margin-top: 12px;">Matematika</h5>
+                        <p style="text-align: justify;">Belajar Matematika jadi mudah dan menyenangkan! Mulai dari operasi hitung dasar, pengukuran, hingga pengenalan bentuk-bentuk geometri.</p>
                         <button class="btn btn-dark">Read More</button>
                     </div>
 
                     <div class="col-md-3 rounded panel-course">
-                        <div class="placeholder-box" style="height: 150px;">
-                            <span>Image Placeholder</span>
-                        </div>
-                        <h5 style="font-size: 22px; margin-top: 12px;">Course Name 2</h5>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                      <img src="..\asset\ipaa.png" width="100%" height="auto" alt="...">
+                        <h5 style="font-size: 22px; margin-top: 12px;">Ilmu Pengetahuan Alam (IPA)</h5>
+                        <p style="text-align:justify;">Eksplorasi dunia sains melalui materi-materi seru seperti sistem tubuh manusia, energi dan perubahannya, serta makhluk hidup dan lingkungannya. Belajar IPA kini lebih menarik dengan gambar dan kuis interaktif.</p>
                         <button class="btn btn-dark">Read More</button>
                     </div>
 
                     <div class="col-md-3 rounded panel-course">
-                        <div class="placeholder-box" style="height: 150px;">
-                            <span>Image Placeholder</span>
-                        </div>
-                        <h5 style="font-size: 22px; margin-top: 12px;">Course Name 3</h5>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <img src="..\asset\ips.png" width="100%" height="auto" alt="...">
+                        <h5 style="font-size: 22px; margin-top: 12px;"> Ilmu Pengetahuan Sosial (IPS)</h5>
+                        <p style="text-align: justify;">Kenali dunia sosial dan budaya Indonesia! Mulai dari pahlawan nasional, peta Indonesia, hingga keberagaman suku dan kegiatan ekonomi. Belajar IPS jadi seru dengan materi visual dan cerita menarik.</p>
                         <button class="btn btn-dark">Read More</button>
                     </div>
 
