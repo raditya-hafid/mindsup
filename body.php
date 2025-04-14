@@ -71,7 +71,7 @@
                     <h4>EASY ACCESS</h4>
                     <hr>
                     <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae cumque incidunt itaque eos adipisci provident magni reprehenderit, quo non amet reiciendis at modi excepturi inventore. Et minima dolores illum eligendi!
+                        akses
                     </p>
                 </div>
             </div>
