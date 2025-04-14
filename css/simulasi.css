@@ -1,0 +1,31 @@
+/* Kustomisasi CSS untuk desain halaman */
+body {
+    background-color: #f4f4f4;
+}
+.navbar-custom {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.card-custom {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+.card-custom:hover {
+    transform: translateY(-5px);
+}
+.hero-section {
+    background: url('https://via.placeholder.com/1920x300.png?text=Simulasi+Pembayaran') no-repeat center center;
+    background-size: cover;
+    color: white;
+    padding: 100px 0 50px;
+    position: relative;
+}
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+}
