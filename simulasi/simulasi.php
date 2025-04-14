@@ -27,12 +27,19 @@ $discountMessage = '';
 $selectedItems = [];
 
 // Proses formulir pembayaran
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+// Proses kupon SAJA
+// Proses kupon SAJA
+if (isset($_POST['applyCoupon'])) {
+    $subtotal = 0;
+    $discount = 0;
+    $discountAmount = 0;
+    $total = 0;
+
     // Daftar mata pelajaran dan harga
     $courses = ['mtk', 'ipa', 'ips'];
     $price = 150000;
 
-    // Hitung subtotal berdasarkan mata pelajaran yang dipilih
+    // Hitung subtotal jika user sudah pilih pelajaran sebelum menerapkan kupon
     foreach ($courses as $course) {
         if (isset($_POST[$course])) {
             $selectedItems[] = strtoupper($course);
@@ -40,8 +47,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // Proses penerapan kode kupon
-    if (isset($_POST['couponCode'])) {
+    // Validasi dan proses kupon
+    $couponCode = strtoupper($_POST['couponCode'] ?? '');
+    if (isset($validCoupons[$couponCode])) {
+        $discount = $validCoupons[$couponCode];
+        $discountAmount = ($subtotal * $discount) / 100;
+        $discountMessage = "Selamat! Anda mendapatkan diskon {$discount}%";
+    } else {
+        $discountMessage = 'Kode kupon tidak valid';
+    }
+
+    $total = $subtotal - $discountAmount;
+}
+
+// Proses pembayaran SAJA
+elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $subtotal = 0;
+    $discount = 0;
+    $discountAmount = 0;
+    $total = 0;
+
+    // Daftar mata pelajaran dan harga
+    $courses = ['mtk', 'ipa', 'ips'];
+    $price = 150000;
+
+    foreach ($courses as $course) {
+        if (isset($_POST[$course])) {
+            $selectedItems[] = strtoupper($course);
+            $subtotal += $price;
+        }
+    }
+
+    // Gunakan kupon jika ada (ambil dari input yang sama)
+    if (!empty($_POST['couponCode'])) {
         $couponCode = strtoupper($_POST['couponCode']);
         if (isset($validCoupons[$couponCode])) {
             $discount = $validCoupons[$couponCode];
@@ -52,7 +90,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // Hitung total pembayaran setelah diskon
     $total = $subtotal - $discountAmount;
 
     // Simpan transaksi jika metode pembayaran dipilih
@@ -66,10 +103,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'total' => $total
         ];
 
-        // Tambahkan transaksi ke riwayat
         array_unshift($_SESSION['transactions'], $transaction);
     }
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -114,7 +152,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
 
                     <!-- Kode Kupon -->
-                    <div class="card card-custom mb-4">
+                    <div class="card card-custom">
                         <div class="card-header bg-primary text-white">
                             <h4 class="mb-0">Kode Kupon</h4>
                         </div>
@@ -123,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <input type="text" class="form-control" name="couponCode" 
                                     placeholder="Masukkan kode kupon" 
                                     value="<?php echo $_POST['couponCode'] ?? ''; ?>">
-                                <button class="btn btn-secondary" type="submit">Terapkan Kupon</button>
+                                <button class="btn btn-secondary" type="submit" name="applyCoupon">Terapkan Kupon</button>
                             </div>
                             <?php if (!empty($discountMessage)): ?>
                                 <div class="alert <?php echo $discount > 0 ? 'alert-success' : 'alert-danger'; ?> mt-2">
@@ -133,6 +171,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </div>
                     </div>
 
+
+
+
+                   
                     <!-- Metode Pembayaran -->
                     <div class="card card-custom mb-4">
                         <div class="card-header bg-primary text-white">
