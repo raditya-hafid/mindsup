@@ -30,7 +30,7 @@ $selectedItems = [];
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Daftar mata pelajaran dan harga
     $courses = ['mtk', 'ipa', 'ips'];
-    $price = 5000;
+    $price = 150000;
 
     // Hitung subtotal berdasarkan mata pelajaran yang dipilih
     foreach ($courses as $course) {
@@ -98,17 +98,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="mtk" id="mtk" value="1" 
                                     <?php echo isset($_POST['mtk']) ? 'checked' : ''; ?>>
-                                <label class="form-check-label" for="mtk">Matematika - Rp 5.000</label>
+                                <label class="form-check-label" for="mtk">Matematika - Rp 150.000</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="ipa" id="ipa" value="1"
                                     <?php echo isset($_POST['ipa']) ? 'checked' : ''; ?>>
-                                <label class="form-check-label" for="ipa">IPA - Rp 5.000</label>
+                                <label class="form-check-label" for="ipa">IPA - Rp 150.000</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="ips" id="ips" value="1"
                                     <?php echo isset($_POST['ips']) ? 'checked' : ''; ?>>
-                                <label class="form-check-label" for="ips">IPS - Rp 5.000</label>
+                                <label class="form-check-label" for="ips">IPS - Rp 150.000</label>
                             </div>
                         </div>
                     </div>
