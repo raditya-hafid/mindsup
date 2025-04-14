@@ -55,7 +55,7 @@
                     <h4>CLEAN DESIGN</h4>
                     <hr>
                     <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae cumque incidunt itaque eos adipisci provident magni reprehenderit, quo non amet reiciendis at modi excepturi inventore. Et minima dolores illum eligendi!
+                        desain bersih nyata
                     </p>
                 </div>
 
