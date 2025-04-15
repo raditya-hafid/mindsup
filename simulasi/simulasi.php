@@ -170,11 +170,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <?php endif; ?>
                         </div>
                     </div>
-
-
-
-
-                   
+                    
                     <!-- Metode Pembayaran -->
                     <div class="card card-custom mb-4">
                         <div class="card-header bg-primary text-white">
