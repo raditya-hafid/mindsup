@@ -43,10 +43,10 @@
             <br>
             <div style="text-align: center;" class="row justify-content-md-center">
                 <div class="col-md-7">
-                    <h1>ABOUT US</h1>
+                    <h1>TENTANG KAMI</h1>
                     <hr>
                     <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae cumque incidunt itaque eos adipisci provident magni reprehenderit, quo non amet reiciendis at modi excepturi inventore. Et minima dolores illum eligendi!
+                    Kami berkomitmen pada desain yang bersih, keamanan data, dan kemudahan akses. Platform kami dirancang untuk memberikan pengalaman terbaik tanpa ribet.
                     </p>
                 </div>
             </div>
@@ -55,7 +55,7 @@
                     <h4>CLEAN DESIGN</h4>
                     <hr>
                     <p>
-                        desain bersih nyata
+                    Tampilan simpel dan nyaman digunakan.
                     </p>
                 </div>
 
@@ -63,7 +63,7 @@
                     <h4>SECURE DATA</h4>
                     <hr>
                     <p>
-                        coba
+                    Informasi Anda terjamin keamanannya.
                     </p>
                 </div>
 
@@ -71,7 +71,7 @@
                     <h4>EASY ACCESS</h4>
                     <hr>
                     <p>
-                        akses
+                    Buka kapan saja, di mana saja.
                     </p>
                 </div>
             </div>
@@ -89,8 +89,8 @@
                             </div>
                             <div id="misi-contents" class="col-md-7">
                               <div class="row">
-                                <h1 class="mb-4">Why Choose Us</h1>
-                                <h3>See What Our Mission Are</h3>
+                                <h1 class="mb-4">Kenapa Memilih Kami</h1>
+                                <h3>Lihat Apa Misi Kami</h3>
                               </div>
                               <div id="misi-content-1" class="row">
                                 <div id="misi-content-1-number" class="col-1">01</div>
@@ -144,7 +144,7 @@
                         <h1>POPULAR COURSES</h1>
                         <hr>
                         <p>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae cumque incidunt itaque eos adipisci provident magni reprehenderit, quo non amet reiciendis at modi excepturi inventore. Et minima dolores illum eligendi!
+                        Raih Prestasi dengan Kelas Favorit <br/>Temukan program unggulan kami yang dirancang untuk membuat belajar menyenangkan dan efektif!
                         </p>
                     </div>
                 </div> 
@@ -176,8 +176,8 @@
 
             <!-- Quote Section -->
             <div class="container quote-section">
-                <p>"Quote: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed nam est vitae id incidunt natum valuare omnis finitum aliquip lorem labores et dolore, enerdari."</p>
-                <p>— Lorem ipsum</p>
+                <p>"Quote: Invest in your knowledge—it yields the best returns for tomorrow."</p>
+                <p>— Benjamin Franklin</p>
             </div>
         </div>
 
