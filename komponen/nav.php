@@ -27,11 +27,12 @@
                         Yourname
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item disabled" href="#" tabindex="-1" aria-disabled="true">Dashboard</a></li>
-                        <li><a class="dropdown-item" href="../input page/input.php">.  >upload</a></li>
-                        <li><a class="dropdown-item" href="../simulasi/simulasi.php">.  >payment</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-speedometer2"></i> Dashboard </a></li>
+                        <li><a class="dropdown-item" href="../input page/input.php"><i class="bi bi-box-arrow-up"></i> Upload</a></li>
+                        <li><a class="dropdown-item" href="../simulasi/simulasi.php"><i class="bi bi-cart me-2"></i> Payment</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Log out</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right me-2"></i> Log out </a></li>
+
                     </ul>
                     </div>
                 </div>
