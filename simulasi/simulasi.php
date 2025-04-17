@@ -2,10 +2,11 @@
 // Mulai sesi untuk menyimpan riwayat transaksi
 session_start();
 
-// Inisialisasi riwayat transaksi jika belum ada
+//Inisialisasi riwayat transaksi jika belum ada
 if (!isset($_SESSION['transactions'])) {
     $_SESSION['transactions'] = [];
 }
+// $_SESSION['transactions']=[];
 
 if (isset($_POST['clear_history'])) {
     $_SESSION['transactions'] = []; // Mengosongkan riwayat transaksi
