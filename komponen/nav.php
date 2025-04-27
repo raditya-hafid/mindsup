@@ -32,6 +32,8 @@
                         <li><a class="dropdown-item" href="../simulasi/simulasi.php"><i class="bi bi-cart me-2"></i> Payment</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right me-2"></i> Log out </a></li>
+                        <!-- contoh simulasi -->
+                        <li><a class="dropdown-item" href="../log in or register/login.php"><i class="bi bi-box-arrow-right me-2"></i> Log in </a></li>
 
                     </ul>
                     </div>
