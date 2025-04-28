@@ -25,7 +25,7 @@
                 <label for="floatingPassword">Password</label>
             </div>
             <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Sign up</button>
-            <small class="text-body-secondary">By clicking Sign up, you agree to the terms of use.</small>
+            <small class="text-body-secondary">Already have an account?<a href="login.php" class="text-primary fw-bold">Back to login</a>.</small>
             <hr class="my-4">
             <h2 class="fs-5 fw-bold mb-3">Or use a third-party</h2>
             <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="submit">
