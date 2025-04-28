@@ -73,6 +73,7 @@ if (isset($_POST['clear_history'])) {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="id">
     <?php
