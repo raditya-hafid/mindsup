@@ -121,6 +121,14 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
      require '../komponen/nav.php';
 
     ?>
+    
+    <!-- sidebar -->
+    <?php
+     require '../komponen/sidebar.php';
+
+    ?>
+
+
 
 
     <div class="container mt-5">
