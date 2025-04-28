@@ -65,8 +65,6 @@ if (isset($_POST['clear_history'])) {
     
             array_unshift($_SESSION['transactions'], $transaction);
             // Redirect untuk mencegah pengulangan transaksi setelah refresh
-            header('Location: ' . $_SERVER['PHP_SELF']);
-            exit;
         } elseif ($_POST['bayar'] == 'bayar') {
             $paymentError = "Silakan pilih mata pelajaran dan metode pembayaran.";
         }
