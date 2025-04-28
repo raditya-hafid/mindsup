@@ -1,16 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Data Input</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="input.css">
-    </style>
-</head>
+
+<?php require '../head/head.php'; ?>
+
 <body>
     <!-- CSS-only Sidebar implementation -->
     <div class="sidebar-container">
@@ -56,7 +48,7 @@
                     $nc = $_POST['namacourse'];
                     $deskripsi = $_POST['deskripsi'];
                     $kategori = $_POST["kategori_materi"];
-                    $metode = $_POST["metode"];
+                    $metode = isset($_POST["metode"]) ? $_POST["metode"] : [];
                     $jenis = $_POST["jenis_kursus"];
                     $tanggal = date("Y-m-d H:i:s");
                     $harga = $_POST["harga"];
