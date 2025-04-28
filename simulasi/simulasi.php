@@ -153,7 +153,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
 
                     <!-- Kode Kupon -->
-                    <div class="card card-custom">
+                    <div class="card card-custom mb-4">
                         <div class="card-header bg-primary text-white">
                             <h4 class="mb-0">Kode Kupon</h4>
                         </div>
