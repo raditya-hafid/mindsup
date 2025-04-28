@@ -28,6 +28,7 @@ $discountMessage = '';
 $selectedItems = [];
 
 // Proses formulir pembayaran
+
 // Proses kupon SAJA
 // Proses kupon SAJA
 if (isset($_POST['applyCoupon'])) {
@@ -68,6 +69,9 @@ elseif (isset($_POST['payment'])) {
     $discountAmount = 0;
     $total = 0;
 
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
     // Daftar mata pelajaran dan harga
     $courses = ['mtk', 'ipa', 'ips'];
     $price = 150000;
@@ -80,7 +84,7 @@ elseif (isset($_POST['payment'])) {
     }
 
     // Gunakan kupon jika ada (ambil dari input yang sama)
-    if (!empty($_POST['couponCode'])) {
+    if (!empty($_POST['couponCode']) && $_POST['button'] == 'kupon') {
         $couponCode = strtoupper($_POST['couponCode']);
         if (isset($validCoupons[$couponCode])) {
             $discount = $validCoupons[$couponCode];
@@ -94,7 +98,7 @@ elseif (isset($_POST['payment'])) {
     $total = $subtotal - $discountAmount;
 
     // Simpan transaksi jika metode pembayaran dipilih
-    if (isset($_POST['payment']) && !empty($selectedItems)) {
+    if (isset($_POST['payment']) && !empty($selectedItems) && $_POST['button'] == 'bayar') {
         $transaction = [
             'date' => date('Y-m-d H:i:s'),
             'items' => $selectedItems,
@@ -119,6 +123,7 @@ elseif (isset($_POST['payment'])) {
     require '../head/head.php';
     ?>
 <body>
+    <?php require '../komponen/sidebar.php'; ?>
     <!-- Navigasi utama -->
     <?php
      require '../komponen/nav.php';
@@ -173,7 +178,7 @@ elseif (isset($_POST['payment'])) {
                                 <input type="text" class="form-control" name="couponCode" 
                                     placeholder="Masukkan kode kupon" 
                                     value="<?php echo $_POST['couponCode'] ?? ''; ?>">
-                                <button class="btn btn-secondary" type="submit" name="applyCoupon">Terapkan Kupon</button>
+                                <button class="btn btn-secondary" type="submit" name="button" value="kupon">Terapkan Kupon</button>
                             </div>
                             <?php if (!empty($discountMessage)): ?>
                                 <div class="alert <?php echo $discount > 0 ? 'alert-success' : 'alert-danger'; ?> mt-2">
@@ -220,7 +225,7 @@ elseif (isset($_POST['payment'])) {
                     </div>
 
                     <!-- Tombol Bayar -->
-                    <button type="submit" class="btn btn-primary w-100">Bayar Sekarang</button>
+                    <button type="submit" name="button" value="bayar" class="btn btn-primary w-100">Bayar Sekarang</button>
                 </form>
 
                 <!-- Riwayat Transaksi -->
