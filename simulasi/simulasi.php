@@ -62,7 +62,7 @@ if (isset($_POST['applyCoupon'])) {
 }
 
 // Proses pembayaran SAJA
-elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+elseif (isset($_POST['payment'])) {
     $subtotal = 0;
     $discount = 0;
     $discountAmount = 0;
@@ -105,6 +105,9 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ];
 
         array_unshift($_SESSION['transactions'], $transaction);
+        //Tambahkan redirect setelah transaksi disimpan
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit;
     }
 }
 
@@ -121,7 +124,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
      require '../komponen/nav.php';
 
     ?>
-    
+
     <!-- sidebar -->
     <?php
      require '../komponen/sidebar.php';
@@ -258,15 +261,15 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
 
-    <!-- Sertakan script Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <form method="POST">
-        <button type="submit" name="clear_history" class="btn btn-danger w-100 mt-2">Hapus Riwayat Transaksi</button>
+      <button type="submit" name="clear_history" class="btn btn-danger w-100 mt-2">Hapus Riwayat Transaksi</button>
     </form>
-
+    
     <?php
         require '../komponen/footer.php';
-    ?>
+        ?>
 
+<!-- Sertakan script Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
