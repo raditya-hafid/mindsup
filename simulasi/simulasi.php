@@ -12,7 +12,7 @@ $validCoupons = [
     'WEBCOURSE' => 20
 ];
 
-// Variabel dasar
+// Variabel dasar 
 $subtotal = 0;
 $discount = 0;
 $discountAmount = 0;

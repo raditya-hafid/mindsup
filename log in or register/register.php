@@ -3,6 +3,23 @@
 <head>
     <?php
     require '../head/head.php';
+    require '../komponen/koneksi.php';
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+        $email = $_POST['email'];
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $username = explode("@", $email)[0]; // bikin username otomatis dari email
+
+        $sql = "INSERT INTO siswa (username, email_siswa, password) VALUES ('$username', '$email', '$password')";
+
+        if (mysqli_query($conn, $sql)){
+            header("Location: login.php");
+            exit();
+        }else{
+            echo "Pendaftaran gagal: " . mysqli_error($conn);
+        }
+    }
+    
     ?>
 </head>
 <body>
@@ -15,7 +32,7 @@
         </div>
 
         <div class="modal-body p-5 pt-0">
-            <form class="">
+            <form class="" method="POST" action="">
             <div class="form-floating mb-3">
                 <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com">
                 <label for="floatingInput">Email address</label>
