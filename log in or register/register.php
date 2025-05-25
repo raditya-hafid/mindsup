@@ -8,7 +8,6 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
         $email = $_POST['email'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $username = explode("@", $email)[0]; // bikin username otomatis dari email
 
         $sql = "INSERT INTO siswa (username, email_siswa, password) VALUES ('$username', '$email', '$password')";
 
@@ -34,11 +33,15 @@
         <div class="modal-body p-5 pt-0">
             <form class="" method="POST" action="">
             <div class="form-floating mb-3">
-                <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com">
+                <input type="" class="form-control rounded-3" name="username" id="floatingusername" placeholder="Username" required>
+                <label for="floatingInput">username</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control rounded-3" name="email" id="floatingemail" placeholder="name@example.com" required>
                 <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password">
+                <input type="password" class="form-control rounded-3" id="floatingPassword" name="password" placeholder="Password" required>
                 <label for="floatingPassword">Password</label>
             </div>
             <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Sign up</button>
