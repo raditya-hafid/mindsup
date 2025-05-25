@@ -2,8 +2,37 @@
 <html lang="en">
 <head>
     <?php
+    session_start();
     require '../head/head.php';
+    require '../komponen/koneksi.php';
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        $stmt = mysqli_prepare($conn, "SELECT * FROM siswa WHERE email_siswa = ?");
+        mysqli_stmt_bind_param($stmt, "s", $email);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        if (mysqli_num_rows($result) === 1) {
+            $row = mysqli_fetch_assoc($result);
+
+            if (password_verify($password, $row['password'])) {
+                $_SESSION['id_siswa'] = $row['id_siswa'];
+                $_SESSION['username'] = $row['username'];
+                header("Location: ../landing page/pertama.php");
+                exit();
+            } else {
+                echo "<script>alert('Password salah!');</script>";
+            }
+        } else {
+            echo "<script>alert('Email tidak ditemukan!');</script>";
+        }
+    }
+
     ?>
+
 </head>
 <body>
 <div class="modal modal-sheet position-static d-block bg-body-secondary p-4 py-md-5" tabindex="-1" role="dialog" id="modalSignin">
@@ -15,13 +44,13 @@
         </div>
 
         <div class="modal-body p-5 pt-0">
-            <form class="">
+            <form class="" method="post" action="">
             <div class="form-floating mb-3">
-                <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com">
+                <input type="email" class="form-control rounded-3" name="email" id="floatingemail" placeholder="name@example.com" required>
                 <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password">
+                <input type="password" class="form-control rounded-3" name="password" id="floatingPassword" placeholder="Password" required>
                 <label for="floatingPassword">Password</label>
             </div>
             <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Log In</button>
