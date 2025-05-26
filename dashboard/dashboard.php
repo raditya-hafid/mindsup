@@ -13,16 +13,16 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
 $courses = [
     [
         'id' => 1,
-        'title' => 'Matematika Dasar',
-        'description' => 'Pelajari konsep dasar matematika dengan mudah dan menyenangkan. Cocok untuk pemula.',
+        'title' => 'Matematika',
+        'description' => 'Belajar Matematika jadi mudah dan menyenangkan! Mulai dari operasi hitung dasar, pengukuran, hingga pengenalan bentuk-bentuk geometri.',
         'image' => '../asset/matematika.png', // Ganti dengan path gambar yang sesuai
         'progress' => 0, // Progress diatur ke 0
         'link' => '#' // Link ke halaman detail kursus
     ],
     [
         'id' => 2,
-        'title' => 'Pengantar Sains (IPA)',
-        'description' => 'Eksplorasi dunia sains melalui materi-materi seru dan interaktif.',
+        'title' => 'Ilmu Pengetahuan Alam (IPA)',
+        'description' => 'Eksplorasi dunia sains melalui materi-materi seru seperti sistem tubuh manusia, energi dan perubahannya, serta makhluk hidup dan lingkungannya. Belajar IPA kini lebih menarik dengan gambar dan kuis interaktif.',
         'image' => '../asset/ipaa.png', // Ganti dengan path gambar yang sesuai
         'progress' => 25, // Progress diatur ke 0
         'link' => '#'
