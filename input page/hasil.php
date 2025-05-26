@@ -36,8 +36,8 @@
 
     <!-- Navigation Bar -->
     <?php
-     require '../komponen/nav.php';
-
+        require '../komponen/nav.php';
+        require '../komponen/koneksi.php';
     ?>
 
     <main class="mt-5">
@@ -45,6 +45,7 @@
             <br>
             <?php
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
                     $nc = $_POST['namacourse'];
                     $deskripsi = $_POST['deskripsi'];
                     $kategori = $_POST["kategori_materi"];
@@ -56,17 +57,15 @@
                     if(isset($_FILES['image'])) {
                         $target_dir = "uploads/"; // Directory dimana gambar akan dikirimkan
                         
-                        
                         if (!file_exists($target_dir)) {
                             mkdir($target_dir, 0777, true);
                         }
                         
-                        
                         $file_extension = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
+                        $check = getimagesize($_FILES["image"]["tmp_name"]);
+
                         $target_file = $target_dir . $nc . "_" . time() . "." . $file_extension;
                         
-                        
-                        $check = getimagesize($_FILES["image"]["tmp_name"]);
                         if($check !== false) {
                             
                             if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
@@ -82,6 +81,12 @@
                                 echo "<tr><td class=\"teks-tabel\"><p><b>Tanggal Upload :</b></p></td><td><p>$tanggal</p></td></tr>"; 
                                 echo "</table></div>";
                                 echo "</div>";
+
+                                $sql = "INSERT INTO `kursus`(`id_mentor`, `judul`, `kategori`, `harga`, `deskripsi`, `id_admin`, `jenis_kursus`, `gambar`) VALUES ('1','$nc','$kategori','$harga','$deskripsi','1','$jenis','$target_file')";
+
+                                if (!mysqli_query($conn, $sql)) {
+                                    echo "Input gagal: " . mysqli_error($conn);
+                                }
                             } else {
                                 echo "<p>Maaf, terjadi kesalahan saat mengupload gambar.</p>";
                             }
