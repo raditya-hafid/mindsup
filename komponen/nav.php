@@ -26,7 +26,7 @@ session_start();
                 <div>
                 <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Yourname'; ?>
+                        <?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Login'; ?>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="#"><i class="bi bi-speedometer2"></i> Dashboard </a></li>
