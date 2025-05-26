@@ -168,7 +168,7 @@
                 <div class="row justify-content-md-center">
                   <?php
                     $index = 0;
-                    while ($index < 3) {
+                    while ($index < count($dataCourse)) {
                       echo '<div class="col-md-3 rounded panel-course">';
                       echo '<img src="../input page/' . $dataCourse[$index]['gambar'] . '" width="100%" height="auto" alt="m..">';
                       echo '<h5 style="font-size: 22px; margin-top: 12px;">' . $dataCourse[$index]['judul'] . '</h5>';
