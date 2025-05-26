@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow">
         <div class="container-fluid">
@@ -24,7 +26,7 @@
                 <div>
                 <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Yourname
+                        <?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Yourname'; ?>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="#"><i class="bi bi-speedometer2"></i> Dashboard </a></li>
