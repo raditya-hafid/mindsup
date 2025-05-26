@@ -29,14 +29,24 @@ session_start();
                         <?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Login'; ?>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-speedometer2"></i> Dashboard </a></li>
-                        <li><a class="dropdown-item" href="../input page/input.php"><i class="bi bi-box-arrow-up"></i> Upload</a></li>
-                        <li><a class="dropdown-item" href="../simulasi/simulasi.php"><i class="bi bi-cart me-2"></i> Payment</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="../log in or register/logout.php"><i class="bi bi-box-arrow-right me-2"></i> Log out </a></li>
-                        <!-- contoh simulasi -->
-                        <li><a class="dropdown-item" href="../log in or register/login.php"><i class="bi bi-box-arrow-right me-2"></i> Log in </a></li>
-
+                        <?php
+                        if (isset($_SESSION['username'])) {
+                            echo "<li><a class=\"dropdown-item\" href=\"#\"><i class=\"bi bi-speedometer2\"></i> Dashboard </a></li>";
+                            echo "<li><a class=\"dropdown-item\" href=\"../input page/input.php\"><i class=\"bi bi-box-arrow-up\"></i> Upload</a></li>";
+                            echo "<li><a class=\"dropdown-item\" href=\"../simulasi/simulasi.php\"><i class=\"bi bi-cart me-2\"></i> Payment</a></li>";
+                            echo "<li><hr class=\"dropdown-divider\"></li>";
+                            echo "<li><a class=\"dropdown-item\" href=\"../log in or register/logout.php\"><i class=\"bi bi-box-arrow-right me-2\"></i> Log out </a></li>";
+                        }else {
+                            //  <!-- contoh simulasi -->
+                            echo "<li><a class=\"dropdown-item\" href=\"../log in or register/login.php\"><i class=\"bi bi-box-arrow-right me-2\"></i> Log in </a></li>";
+                        }
+                        ?>
+                        
+                        
+                        
+                       
+                        
+                        
                     </ul>
                     </div>
                 </div>
