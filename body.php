@@ -147,17 +147,40 @@
                         Raih Prestasi dengan Kelas Favorit <br/>Temukan program unggulan kami yang dirancang untuk membuat belajar menyenangkan dan efektif!
                         </p>
                     </div>
-                </div> 
+                </div>
+
+                <?php
+                  require '../komponen/koneksi.php';
+
+                  $sql = "SELECT `gambar`, `judul`, `deskripsi` FROM `kursus` ORDER BY `id_kursus` DESC LIMIT 3";
+                  $result = mysqli_query($conn, $sql);
+
+                  $dataCourse = [];
+                  if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                      $dataCourse[] = $row;
+                    }
+                  } else {
+                    echo "Tidak ada data";
+                  }
+                ?>
 
                 <div class="row justify-content-md-center">
-                    <div class="col-md-3 rounded panel-course">
-                        <img src="..\asset\matematika.png" width="100%" height="auto" alt="...">
-                        <h5 style="font-size: 22px; margin-top: 12px;">Matematika</h5>
-                        <p style="text-align: justify;">Belajar Matematika jadi mudah dan menyenangkan! Mulai dari operasi hitung dasar, pengukuran, hingga pengenalan bentuk-bentuk geometri.</p>
-                        <button class="btn btn-dark">Read More</button>
-                    </div>
+                  <?php
+                    $index = 0;
+                    while ($index < 3) {
+                      echo '<div class="col-md-3 rounded panel-course">';
+                      echo '<img src="../input page/' . $dataCourse[$index]['gambar'] . '" width="100%" height="auto" alt="m..">';
+                      echo '<h5 style="font-size: 22px; margin-top: 12px;">' . $dataCourse[$index]['judul'] . '</h5>';
+                      echo '<p style="text-align: justify;">' . $dataCourse[0]['deskripsi'] . '</p>';
+                      echo '<button class="btn btn-dark">Read More</button>';
+                      echo '</div>';
 
-                    <div class="col-md-3 rounded panel-course">
+                      $index = $index + 1;
+                    }
+                  ?>
+
+                    <!-- <div class="col-md-3 rounded panel-course">
                       <img src="..\asset\ipaa.png" width="100%" height="auto" alt="...">
                         <h5 style="font-size: 22px; margin-top: 12px;">Ilmu Pengetahuan Alam (IPA)</h5>
                         <p style="text-align:justify;">Eksplorasi dunia sains melalui materi-materi seru seperti sistem tubuh manusia, energi dan perubahannya, serta makhluk hidup dan lingkungannya. Belajar IPA kini lebih menarik dengan gambar dan kuis interaktif.</p>
@@ -169,7 +192,7 @@
                         <h5 style="font-size: 22px; margin-top: 12px;"> Ilmu Pengetahuan Sosial (IPS)</h5>
                         <p style="text-align: justify;">Kenali dunia sosial dan budaya Indonesia! Mulai dari pahlawan nasional, peta Indonesia, hingga keberagaman suku dan kegiatan ekonomi. Belajar IPS jadi seru dengan materi visual dan cerita menarik.</p>
                         <button class="btn btn-dark">Read More</button>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
