@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) || $_SESSION['role
 $id_mentor_saat_ini = $_SESSION['user_id'];
 
 $list_kursus = [];
-$stmt = $conn->prepare("SELECT id_kursus, judul_kursus, kategori_materi, jenis_kursus, harga_kursus, thumbnail_kursus, tanggal_upload FROM kursus WHERE id_mentor = ? ORDER BY tanggal_upload DESC");
+$stmt = $conn->prepare("SELECT `id_kursus`, `id_mentor`, `judul`, `kategori`, `harga`, `deskripsi`, `id_admin`, `jenis_kursus`, `gambar` FROM `kursus` WHERE id_mentor = ? ORDER BY id_kursus DESC");
 if ($stmt) {
     $stmt->bind_param("i", $id_mentor_saat_ini);
     $stmt->execute();
@@ -73,7 +73,6 @@ if ($stmt) {
                                     <th>Kategori</th>
                                     <th>Jenis</th>
                                     <th>Harga (Rp)</th>
-                                    <th>Tgl Upload</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
@@ -88,16 +87,16 @@ if ($stmt) {
                                             <small class="text-muted">N/A</small>
                                         <?php endif; ?>
                                     </td>
-                                    <td><?php echo htmlspecialchars($kursus['judul_kursus']); ?></td>
-                                    <td><?php echo htmlspecialchars($kursus['kategori_materi']); ?></td>
+                                    <td><?php echo htmlspecialchars($kursus['judul']); ?></td>
+                                    <td><?php echo htmlspecialchars($kursus['kategori']); ?></td>
                                     <td><span class="badge bg-<?php echo ($kursus['jenis_kursus'] == 'Berbayar') ? 'warning text-dark' : 'info'; ?>"><?php echo htmlspecialchars($kursus['jenis_kursus']); ?></span></td>
                                     <td><?php echo ($kursus['jenis_kursus'] == 'Berbayar' ? number_format($kursus['harga_kursus'], 0, ',', '.') : '-'); ?></td>
-                                    <td><?php echo date('d M Y', strtotime($kursus['tanggal_upload'])); ?></td>
+                                    
                                     <td class="text-center">
                                         <a href="edit_kursus.php?id=<?php echo $kursus['id_kursus']; ?>" class="btn btn-outline-warning btn-sm" title="Edit">
                                             <i class="bi bi-pencil-fill"></i> Edit
                                         </a>
-                                        <form action="proses_kursus.php" method="POST" class="d-inline-block ms-1" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kursus \'<?php echo htmlspecialchars(addslashes($kursus['judul_kursus'])); ?>\'? Tindakan ini tidak dapat diurungkan.');">
+                                        <form action="proses_kursus.php" method="POST" class="d-inline-block ms-1" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kursus \'<?php echo htmlspecialchars(addslashes($kursus['judul'])); ?>\'? Tindakan ini tidak dapat diurungkan.');">
                                             <input type="hidden" name="action" value="delete">
                                             <input type="hidden" name="id_kursus" value="<?php echo $kursus['id_kursus']; ?>">
                                             <button type="submit" class="btn btn-outline-danger btn-sm" title="Hapus">
