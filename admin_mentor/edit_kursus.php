@@ -59,7 +59,7 @@ $metode_pembelajaran_tersimpan = !empty($kursus['metode_pembelajaran']) ? explod
              <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card shadow-sm">
-                        <div class="card-header bg-warning text-dark"> {/* Warna warning untuk edit */}
+                        <div class="card-header bg-warning text-dark">
                             <h4 class="mb-0">Edit Kursus: <?php echo htmlspecialchars($kursus['judul_kursus']); ?></h4>
                         </div>
                         <div class="card-body p-4">

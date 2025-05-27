@@ -120,8 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <label for="floatingPassword">Password</label>
                     </div>
                     <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Log In</button>
-                    <small class="text-body-secondary">Don’t have an account? <a href="register.php" class="text-primary fw-bold">Click here</a></small> {/* Registrasi hanya untuk siswa */}
-                    {/* ... tombol third-party ... */}
+                    <small class="text-body-secondary">Don’t have an account? <a href="register.php" class="text-primary fw-bold">Click here</a></small>
                 </form>
             </div>
         </div>

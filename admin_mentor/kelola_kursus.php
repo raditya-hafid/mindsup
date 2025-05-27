@@ -40,7 +40,7 @@ if ($stmt) {
     <?php require '../komponen/nav.php'; // ?>
 
     <main class="mt-5 pt-4">
-        <div class="container-fluid px-4"> {/* Gunakan container-fluid untuk lebih lebar */}
+        <div class="container-fluid px-4">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h2 class="mb-0">Kelola Kursus Anda</h2>
                 <a href="tambah_kursus.php" class="btn btn-success"><i class="bi bi-plus-circle-fill me-2"></i>Tambah Kursus Baru</a>
