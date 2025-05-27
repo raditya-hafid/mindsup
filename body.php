@@ -164,9 +164,9 @@
                     $index = 0;
                     while ($index < count($dataCourse)) {
                       echo '<div class="col-md-3 rounded panel-course">';
-                      echo '<img src="../input page/' . $dataCourse[$index]['gambar'] . '" width="100%" height="auto" alt="m..">';
+                      echo '<img src="../input page/' . $dataCourse[$index]['gambar'] . '" width="100%" height="auto" alt="Cover Image">';
                       echo '<h5 style="font-size: 22px; margin-top: 12px;">' . $dataCourse[$index]['judul'] . '</h5>';
-                      echo '<p style="text-align: justify;">' . $dataCourse[0]['deskripsi'] . '</p>';
+                      echo '<p style="text-align: justify; word-wrap: break-word;">' . $dataCourse[$index]['deskripsi'] . '</p>';
                       echo '<button class="btn btn-dark">Read More</button>';
                       echo '</div>';
 
