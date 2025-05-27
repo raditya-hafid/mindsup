@@ -1,5 +1,13 @@
-<!DOCTYPE html>
+!<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Landing Page</title>
+    <style>
+      body{
+        overflow-x: hidden;
+      }
+    </style>
+  </head>
 <?php
     require '../head/head.php';
 ?>
