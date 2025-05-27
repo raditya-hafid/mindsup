@@ -38,9 +38,9 @@
   </button>
 </div>
 
-<div id="about" class="main-content">
+<div id="about" class="main-content" style="scroll-margin-top: 50px !important;">
   <br>
-  <div style="text-align: center;" class="row justify-content-md-center">
+  <div style="text-align: center; " class="row justify-content-md-center">
     <div class="col-md-7">
       <h1>TENTANG KAMI</h1>
       <hr>
