@@ -69,112 +69,129 @@
       <p>Buka kapan saja, di mana saja.</p>
     </div>
   </div>
-
-            <!-- Featured Courses Section 1 -->
-             <div>
-                <div class="container-fluid featured-courses">
-
-
-                    <section id="whychooseus">
-                        <div class="contaier">
-                          <div id="pembungkus" class="row">
-                            <div id="gambar-kiri" class="col-md-5">
-                              <img class="img-fluid h-100 w-100 object-fit-cover" src="../asset/foto.jpeg" alt="foto">
-                            </div>
-                            <div id="misi-contents" class="col-md-7">
-                              <div class="row">
-                                <h1 class="mb-4">Kenapa Memilih Kami</h1>
-                                <h3>Lihat Apa Misi Kami</h3>
-                              </div>
-                              <div id="misi-content-1" class="row">
-                                <div id="misi-content-1-number" class="col-1">01</div>
-                                <div id="misi-content-1-explain" class="col-11">
-                                  <div id="misi-content-1-explain-title" class="row h5">Membantu Anak Belajar Lebih Mudah</div>
-                                  <div id="misi-content-1-explain-again" class="row">Minds Up ingin membuat anak-anak lebih mudah
-                                    memahami pelajaran dengan cara yang simpel dan tidak membingungkan.
-                                    Materinya dibuat ringan dan jelas supaya anak tidak merasa sulit saat belajar.
-                                  </div>
-                                </div>
-                              </div><br>
-                              <div id="misi-content-2" class="row">
-                                <div id="misi-content-2-number" class="col-1">02</div>
-                                <div id="misi-content-2-explain" class="col-11">
-                                  <div id="misi-content-2-explain-title" class="row h5">Belajar dengan Cara yang Menyenangkan</div>
-                                  <div id="misi-content-2-explain-again" class="row">Supaya anak tidak cepat bosan, Minds Up berusaha
-                                    membuat pembelajaran lebih seru, misalnya dengan gambar menarik, video menarik, atau latihan yang
-                                    tidak terlalu berat.
-                                  </div>
-                                </div>
-                              </div><br>
-                              <div id="misi-content-3" class="row">
-                                <div id="misi-content-3-number" class="col-1">03</div>
-                                <div id="misi-content-3-explain" class="col-11">
-                                  <div id="misi-content-3-explain-title" class="row h5">Membantu Anak Lebih Percaya Diri</div>
-                                  <div id="misi-content-3-explain-again" class="row">Minds Up ingin membuat anak lebih percaya diri saat
-                                    belajar. Materi disusun agar mudah dimengerti, dan ada latihan
-                                    ringan supaya mereka bisa mencoba sendiri tanpa takut salah.</div>
-                                </div>
-                              </div><br>
-                              <div id="misi-content-4" class="row">
-                                <div id="misi-content-4-number" class="col-1">04</div>
-                                <div id="misi-content-4-explain" class="col-11">
-                                  <div id="misi-content-4-explain-title" class="row h5">Menyediakan Materi yang Mudah Dipahami</div>
-                                  <div id="misi-content-4-explain-again" class="row">Materi di Minds Up dibuat dengan bahasa yang
-                                    sederhana dan contoh yang jelas. Anak-anak bisa membaca dan belajar tanpa
-                                    perlu merasa kesulitan memahami isi pelajaran.</div>
-                                  </div>
-                                </div><br>
-                            </div>
-                          </div>
-                        </div>
-                      </section>
-                </div>
-             </div>
-            
-            <!-- Featured Courses Section 2 -->
-            <div class="container-fluid featured-courses">
-                <div style="text-align: center;" class="row justify-content-md-center">
-                    <div class="col-md-9">
-                        <h1>POPULAR COURSES</h1>
-                        <hr>
-                        <p>
-                        Raih Prestasi dengan Kelas Favorit <br/>Temukan program unggulan kami yang dirancang untuk membuat belajar menyenangkan dan efektif!
-                        </p>
-                    </div>
-                </div>
-
-                <?php
-                  require '../komponen/koneksi.php';
-
-                  $sql = "SELECT `gambar`, `judul`, `deskripsi` FROM `kursus` ORDER BY `id_kursus` DESC LIMIT 3";
-                  $result = mysqli_query($conn, $sql);
-
-                  $dataCourse = [];
-                  if (mysqli_num_rows($result) > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                      $dataCourse[] = $row;
-                    }
-                  } else {
-                    echo "Tidak ada data";
-                  }
-                ?>
-
-                <div class="row justify-content-md-center">
-                  <?php
-                    $index = 0;
-                    while ($index < count($dataCourse)) {
-                      echo '<div class="col-md-3 rounded panel-course">';
-                      echo '<img src="../input page/' . $dataCourse[$index]['gambar'] . '" width="100%" height="auto" alt="Cover Image">';
-                      echo '<h5 style="font-size: 22px; margin-top: 12px;">' . $dataCourse[$index]['judul'] . '</h5>';
-                      echo '<p style="text-align: justify; word-wrap: break-word;">' . $dataCourse[$index]['deskripsi'] . '</p>';
-                      echo '<button class="btn btn-dark">Read More</button>';
-                      echo '</div>';
-
-                      $index = $index + 1;
-                    }
-                  ?>
-                </div>
+  <!-- Featured Courses Section 1 -->
+  <div>
+    <div class="container-fluid featured-courses">
+      <section id="whychooseus" class="py-5 bg-light">
+        <div class="container">
+          <div id="pembungkus" class="row">
+            <div id="gambar-kiri" class="col-md-6 mb-4 mb-md-0 d-flex">
+              <img class="img-fluid rounded shadow-sm" src="../asset/foto.jpeg" alt="Kenapa Memilih Kami" style="object-fit: cover; width: 100%; height: 100%;">
             </div>
+            <div id="misi-contents" class="col-md-6 d-flex flex-column justify-content-center">
+              <div class="ps-md-4">
+                <div class="mb-4">
+                  <h2 class="fw-bold display-5 mb-3">Kenapa Memilih <span class="text-primary">Kami</span></h2>
+                  <h4 class="fw-semibold text-secondary">Lihat Apa Misi Kami</h4>
+                </div>
+
+                <div class="misi-item d-flex mb-4">
+                  <div class="misi-number-bg me-3">
+                    <span class="misi-number">01</span>
+                  </div>
+                  <div class="misi-text">
+                    <h5 class="fw-semibold mb-1">
+                      <i class="bi bi-lightbulb-fill text-warning me-2"></i>Membantu Anak Belajar Lebih Mudah
+                    </h5>
+                    <p class="text-muted small">Minds Up ingin membuat anak-anak lebih mudah memahami pelajaran dengan cara yang simpel dan tidak membingungkan. Materinya dibuat ringan dan jelas supaya anak tidak merasa sulit saat belajar.</p>
+                  </div>
+                </div>
+
+                <div class="misi-item d-flex mb-4">
+                  <div class="misi-number-bg me-3">
+                    <span class="misi-number">02</span>
+                  </div>
+                  <div class="misi-text">
+                    <h5 class="fw-semibold mb-1">
+                      <i class="bi bi-emoji-smile-fill text-success me-2"></i>Belajar dengan Cara yang Menyenangkan
+                    </h5>
+                    <p class="text-muted small">Supaya anak tidak cepat bosan, Minds Up berusaha membuat pembelajaran lebih seru, misalnya dengan gambar menarik, video menarik, atau latihan yang tidak terlalu berat.</p>
+                  </div>
+                </div>
+
+                <div class="misi-item d-flex mb-4">
+                  <div class="misi-number-bg me-3">
+                    <span class="misi-number">03</span>
+                  </div>
+                  <div class="misi-text">
+                    <h5 class="fw-semibold mb-1">
+                      <i class="bi bi-person-check-fill text-info me-2"></i>Membantu Anak Lebih Percaya Diri
+                    </h5>
+                    <p class="text-muted small">Minds Up ingin membuat anak lebih percaya diri saat belajar. Materi disusun agar mudah dimengerti, dan ada latihan ringan supaya mereka bisa mencoba sendiri tanpa takut salah.</p>
+                  </div>
+                </div>
+
+                <div class="misi-item d-flex">
+                  <div class="misi-number-bg me-3">
+                    <span class="misi-number">04</span>
+                  </div>
+                  <div class="misi-text">
+                    <h5 class="fw-semibold mb-1">
+                      <i class="bi bi-journal-text text-danger me-2"></i>Menyediakan Materi yang Mudah Dipahami
+                    </h5>
+                    <p class="text-muted small">Materi di Minds Up dibuat dengan bahasa yang sederhana dan contoh yang jelas. Anak-anak bisa membaca dan belajar tanpa perlu merasa kesulitan memahami isi pelajaran.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Featured Courses Section 2 -->
+  <div class="container-fluid featured-courses">
+    <div style="text-align: center;" class="row justify-content-md-center">
+      <div class="col-md-9">
+        <h1>POPULAR COURSES</h1>
+        <hr>
+        <p>
+          Raih Prestasi dengan Kelas Favorit <br />Temukan program unggulan kami yang dirancang untuk membuat belajar menyenangkan dan efektif!
+        </p>
+      </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="rounded panel-course h-100">
+          <img src="..\asset\matematika.png" width="100%" height="auto" alt="Matematika" class="img-fluid rounded-top">
+          <div class="p-3 d-flex flex-column">
+            <h5 style="font-size: 20px; margin-top: 12px;" class="fw-semibold">Matematika</h5>
+            <p style="text-align: justify; font-size: 0.9rem;" class="text-muted">Belajar Matematika jadi mudah dan menyenangkan! Mulai dari operasi hitung dasar, pengukuran, hingga pengenalan bentuk-bentuk geometri.</p>
+            <a href="#" class="btn btn-outline-primary mt-auto">
+              Lihat Detail <i class="bi bi-arrow-right-short"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="rounded panel-course h-100">
+          <img src="..\asset\ipaa.png" width="100%" height="auto" alt="IPA" class="img-fluid rounded-top">
+          <div class="p-3 d-flex flex-column">
+            <h5 style="font-size: 20px; margin-top: 12px;" class="fw-semibold">Ilmu Pengetahuan Alam (IPA)</h5>
+            <p style="text-align:justify; font-size: 0.9rem;" class="text-muted">Eksplorasi dunia sains melalui materi-materi seru seperti sistem tubuh manusia, energi dan perubahannya, serta makhluk hidup dan lingkungannya. Belajar IPA kini lebih menarik dengan gambar dan kuis interaktif.</p>
+            <a href="#" class="btn btn-outline-primary mt-auto">
+              Lihat Detail <i class="bi bi-arrow-right-short"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="rounded panel-course h-100">
+          <img src="..\asset\ips.png" width="100%" height="auto" alt="IPS" class="img-fluid rounded-top">
+          <div class="p-3 d-flex flex-column">
+            <h5 style="font-size: 20px; margin-top: 12px;" class="fw-semibold"> Ilmu Pengetahuan Sosial (IPS)</h5>
+            <p style="text-align: justify; font-size: 0.9rem;" class="text-muted">Kenali dunia sosial dan budaya Indonesia! Mulai dari pahlawan nasional, peta Indonesia, hingga keberagaman suku dan kegiatan ekonomi. Belajar IPS jadi seru dengan materi visual dan cerita menarik.</p>
+            <a href="#" class="btn btn-outline-primary mt-auto">
+              Lihat Detail <i class="bi bi-arrow-right-short"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Quote Section -->
     <div class="container quote-section">

@@ -41,6 +41,12 @@ session_start();
                             echo "<li><a class=\"dropdown-item\" href=\"../log in or register/login.php\"><i class=\"bi bi-box-arrow-right me-2\"></i> Log in </a></li>";
                         }
                         ?>
+                        
+                        
+                        
+                       
+                        
+                        
                     </ul>
                     </div>
                 </div>
