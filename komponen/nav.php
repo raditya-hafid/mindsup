@@ -14,7 +14,7 @@ session_start();
                         <a class="nav-link" href="../landing page/pertama.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Courses</a>
+                        <a class="nav-link" href="../courses/index.php">Courses</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../landing page/pertama.php#about">About</a>
