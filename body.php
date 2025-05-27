@@ -162,7 +162,7 @@
                 <div class="row justify-content-md-center">
                   <?php
                     $index = 0;
-                    while ($index < 3) {
+                    while ($index < count($dataCourse)) {
                       echo '<div class="col-md-3 rounded panel-course">';
                       echo '<img src="../input page/' . $dataCourse[$index]['gambar'] . '" width="100%" height="auto" alt="m..">';
                       echo '<h5 style="font-size: 22px; margin-top: 12px;">' . $dataCourse[$index]['judul'] . '</h5>';
@@ -173,21 +173,6 @@
                       $index = $index + 1;
                     }
                   ?>
-
-                    <!-- <div class="col-md-3 rounded panel-course">
-                      <img src="..\asset\ipaa.png" width="100%" height="auto" alt="...">
-                        <h5 style="font-size: 22px; margin-top: 12px;">Ilmu Pengetahuan Alam (IPA)</h5>
-                        <p style="text-align:justify;">Eksplorasi dunia sains melalui materi-materi seru seperti sistem tubuh manusia, energi dan perubahannya, serta makhluk hidup dan lingkungannya. Belajar IPA kini lebih menarik dengan gambar dan kuis interaktif.</p>
-                        <button class="btn btn-dark">Read More</button>
-                    </div>
-
-                    <div class="col-md-3 rounded panel-course">
-                        <img src="..\asset\ips.png" width="100%" height="auto" alt="...">
-                        <h5 style="font-size: 22px; margin-top: 12px;"> Ilmu Pengetahuan Sosial (IPS)</h5>
-                        <p style="text-align: justify;">Kenali dunia sosial dan budaya Indonesia! Mulai dari pahlawan nasional, peta Indonesia, hingga keberagaman suku dan kegiatan ekonomi. Belajar IPS jadi seru dengan materi visual dan cerita menarik.</p>
-                        <button class="btn btn-dark">Read More</button>
-                    </div> -->
-
                 </div>
             </div>
 
