@@ -2,25 +2,29 @@
 <html lang="en">
 <head>
     <?php
-    require '../head/head.php';
-    require '../komponen/koneksi.php';
+    require '../head/head.php'; //
+    require '../komponen/koneksi.php'; //
 
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
         $username = $_POST['username'];
         $email = $_POST['email'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $role = 'siswa'; // Default role untuk registrasi
 
-        $sql = "INSERT INTO siswa (username, email_siswa, password) VALUES ('$username', '$email', '$password')";
+        // Pastikan tabel siswa Anda punya kolom 'role'
+        $sql = "INSERT INTO siswa (username, email_siswa, password, role) VALUES (?, ?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "ssss", $username, $email, $password, $role);
 
-        if (mysqli_query($conn, $sql)){
+        if (mysqli_stmt_execute($stmt)){
             header("Location: login.php");
             exit();
         }else{
             echo "Pendaftaran gagal: " . mysqli_error($conn);
         }
+        mysqli_stmt_close($stmt);
     }
-    
-    ?>
+?>
 </head>
 <body>
 <div class="modal modal-sheet position-static d-block bg-body-secondary p-4 py-md-5" tabindex="-1" role="dialog" id="modalSignin">
