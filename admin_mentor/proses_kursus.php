@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
     // UPDATE
     elseif ($action == 'update') {
         if (empty(trim($_POST['id_kursus'])) || !is_numeric($_POST['id_kursus']) || empty(trim($_POST['judul_kursus'])) || empty(trim($_POST['deskripsi_kursus'])) || empty(trim($_POST['kategori_materi'])) || empty($_POST['jenis_kursus'])) {
-            $_SESSION['error_message'] = "ID atau field wajib lainnya tidak valid.";
+            $_SESSION['error_message'] = "ID atau field wajib lainnya tidak vaaa. <br> = ". empty(trim($_POST['kategori_materi'])) ;
             header("Location: kelola_kursus.php"); // Redirect ke kelola jika ID bermasalah
             exit();
         }
@@ -146,9 +146,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
         }
 
 
-        $stmt = $conn->prepare("UPDATE kursus SET judul_kursus=?, deskripsi_kursus=?, kategori_materi=?, metode_pembelajaran=?, jenis_kursus=?, harga_kursus=?, thumbnail_kursus=? WHERE id_kursus=? AND id_mentor=?");
+        $stmt = $conn->prepare("UPDATE kursus SET id_kursus=?, id_mentor=?, judul=?, kategori=?, harga=?, deskripsi=?, id_admin=?, jenis_kursus=?, gambar=? WHERE id_kursus=? AND id_mentor=?");
         if ($stmt) {
-            $stmt->bind_param("sssssdsii", $judul_kursus, $deskripsi_kursus, $kategori_materi, $metode_pembelajaran, $jenis_kursus, $harga_kursus, $final_thumbnail_path, $id_kursus, $id_mentor_saat_ini);
+            $stmt->bind_param("iissisissii", $id_kursus, $id_mentor_saat_ini, $judul_kursus, $kategori_materi, $harga_kursus, $deskripsi_kursus, $id_admin, $jenis_kursus, $thumbnail_path, $id_kursus, $id_mentor_saat_ini);
             if ($stmt->execute()) {
                 $_SESSION['success_message'] = "Kursus \"".htmlspecialchars($judul_kursus)."\" berhasil diperbarui!";
             } else {

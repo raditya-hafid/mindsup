@@ -17,6 +17,7 @@ if (!isset($_GET['id']) || empty(trim($_GET['id'])) || !is_numeric($_GET['id']))
 $id_kursus_edit = (int)$_GET['id'];
 $id_mentor_saat_ini = $_SESSION['user_id'];
 $kursus = null;
+$id_kursus_CRUD = 0;
 
 $stmt = $conn->prepare("SELECT * FROM kursus WHERE id_kursus = ? AND id_mentor = ?");
 if ($stmt) {
@@ -25,6 +26,7 @@ if ($stmt) {
     $result = $stmt->get_result();
     if ($result->num_rows === 1) {
         $kursus = $result->fetch_assoc();
+        $id_kursus_CRUD = $id_kursus_edit;
     } else {
         $_SESSION['error_message'] = "Kursus tidak ditemukan atau Anda tidak memiliki izin untuk mengeditnya.";
         header("Location: kelola_kursus.php");
@@ -60,7 +62,7 @@ $metode_pembelajaran_tersimpan = !empty($kursus['metode_pembelajaran']) ? explod
                 <div class="col-md-8">
                     <div class="card shadow-sm">
                         <div class="card-header bg-warning text-dark">
-                            <h4 class="mb-0">Edit Kursus: <?php echo htmlspecialchars($kursus['judul_kursus']); ?></h4>
+                            <h4 class="mb-0">Edit Kursus: <?php echo htmlspecialchars($kursus['judul']); ?></h4>
                         </div>
                         <div class="card-body p-4">
                             <?php if(isset($_SESSION['error_message'])): ?>
@@ -69,16 +71,16 @@ $metode_pembelajaran_tersimpan = !empty($kursus['metode_pembelajaran']) ? explod
 
                             <form action="proses_kursus.php" method="POST" enctype="multipart/form-data">
                                 <input type="hidden" name="action" value="update">
-                                <input type="hidden" name="id_kursus" value="<?php echo $kursus['id_kursus']; ?>">
-                                <input type="hidden" name="existing_thumbnail" value="<?php echo htmlspecialchars($kursus['thumbnail_kursus']); ?>">
+                                <input type="hidden" name="id_kursus" value="<?php echo $id_kursus_CRUD; ?>">
+                                <input type="hidden" name="existing_thumbnail" value="<?php echo htmlspecialchars($kursus['gambar']); ?>">
                                 
                                 <div class="mb-3">
                                     <label for="judul_kursus" class="form-label fw-bold">Nama Course</label>
-                                    <input type="text" class="form-control" id="judul_kursus" name="judul_kursus" value="<?php echo htmlspecialchars($kursus['judul_kursus']); ?>" required>
+                                    <input type="text" class="form-control" id="judul_kursus" name="judul_kursus" value="<?php echo htmlspecialchars($kursus['judul']); ?>" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="deskripsi_kursus" class="form-label fw-bold">Deskripsi</label>
-                                    <textarea name="deskripsi_kursus" id="deskripsi_kursus" class="form-control" rows="5" required><?php echo htmlspecialchars($kursus['deskripsi_kursus']); ?></textarea>
+                                    <textarea name="deskripsi_kursus" id="deskripsi_kursus" class="form-control" rows="5" required><?php echo htmlspecialchars($kursus['deskripsi']); ?></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="kategori_materi" class="form-label fw-bold">Kategori Materi</label>
@@ -119,7 +121,7 @@ $metode_pembelajaran_tersimpan = !empty($kursus['metode_pembelajaran']) ? explod
                                 </div>
                                 <div class="mb-3">
                                     <label for="harga_kursus" class="form-label fw-bold">Harga Kursus (Rp)</label>
-                                    <input type="number" class="form-control" id="harga_kursus" name="harga_kursus" min="0" placeholder="Isi jika jenis kursus berbayar" value="<?php echo htmlspecialchars($kursus['harga_kursus']); ?>">
+                                    <input type="number" class="form-control" id="harga_kursus" name="harga_kursus" min="0" placeholder="Isi jika jenis kursus berbayar" value="<?php echo htmlspecialchars($kursus['harga']); ?>">
                                 </div>
                                 <div class="mb-3">
                                     <label for="thumbnail_kursus" class="form-label fw-bold">Upload Thumbnail Baru (Kosongkan jika tidak ingin ganti)</label>

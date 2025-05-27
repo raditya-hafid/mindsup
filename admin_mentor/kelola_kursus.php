@@ -90,7 +90,7 @@ if ($stmt) {
                                     <td><?php echo htmlspecialchars($kursus['judul']); ?></td>
                                     <td><?php echo htmlspecialchars($kursus['kategori']); ?></td>
                                     <td><span class="badge bg-<?php echo ($kursus['jenis_kursus'] == 'Berbayar') ? 'warning text-dark' : 'info'; ?>"><?php echo htmlspecialchars($kursus['jenis_kursus']); ?></span></td>
-                                    <td><?php echo ($kursus['jenis_kursus'] == 'Berbayar' ? number_format($kursus['harga_kursus'], 0, ',', '.') : '-'); ?></td>
+                                    <td><?php echo ($kursus['jenis_kursus'] == 'Berbayar' ? number_format($kursus['harga'], 0, ',', '.') : '-'); ?></td>
                                     
                                     <td class="text-center">
                                         <a href="edit_kursus.php?id=<?php echo $kursus['id_kursus']; ?>" class="btn btn-outline-warning btn-sm" title="Edit">
