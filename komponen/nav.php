@@ -15,6 +15,7 @@ session_start();
     }
     .container-fluid .sisi:hover {
       letter-spacing: 1px;
+      border: 1px solid #007bff;
     }
   </style>
 </head>
