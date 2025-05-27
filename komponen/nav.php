@@ -25,20 +25,20 @@ session_start();
               <label for="sidebar-toggle" class="navbar-brand text-primary display-5" style="cursor: pointer;">
                 <i class="bi bi-list"></i>
               </label>
-              <a href="../landing page/pertama.php" class="sisi text-decoration-none text-primary fs-5">Minds Up</a>
+              <a href="../landing page/index.php" class="sisi text-decoration-none text-primary fs-5">Minds Up</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                   <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarNav">
                   <ul class="navbar-nav mx-auto">
                       <li class="nav-item">
-                          <a class="nav-link" href="../landing page/pertama.php">Home</a>
+                          <a class="nav-link" href="../landing page/index.php">Home</a>
                       </li>
                       <li class="nav-item">
                           <a class="nav-link" href="#">Courses</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="../landing page/pertama.php#about">About</a>
+                          <a class="nav-link" href="../landing page/index.php#about">About</a>
                       </li>
                       <li class="nav-item">
                           <a class="nav-link" href="#">Programs/Content</a>
