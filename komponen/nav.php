@@ -31,7 +31,12 @@ session_start();
                     <ul class="dropdown-menu dropdown-menu-end">
                         <?php
                         if (isset($_SESSION['username'])) {
-                            echo "<li><a class=\"dropdown-item\" href=\"../dashboard/dashboard.php\"><i class=\"bi bi-speedometer2\"></i> Dashboard </a></li>";
+                            if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'mentor'){
+                                echo "<li><a class=\"dropdown-item\" href=\"../admin_mentor/dashboard_mentor.php\"><i class=\"bi bi-speedometer2\"></i> Dashboard </a></li>";
+                            } else {
+                                echo "<li><a class=\"dropdown-item\" href=\"../dashboard/dashboard.php\"><i class=\"bi bi-speedometer2\"></i> Dashboard </a></li>";
+                            }
+                            
                             echo "<li><a class=\"dropdown-item\" href=\"../input page/input.php\"><i class=\"bi bi-box-arrow-up\"></i> Upload</a></li>";
                             echo "<li><a class=\"dropdown-item\" href=\"../simulasi/simulasi.php\"><i class=\"bi bi-cart me-2\"></i> Keranjang</a></li>";
                             echo "<li><hr class=\"dropdown-divider\"></li>";
