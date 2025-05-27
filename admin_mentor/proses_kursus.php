@@ -91,9 +91,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
              exit();
         }
         
-        $stmt = $conn->prepare("INSERT INTO kursus (id_mentor, judul_kursus, deskripsi_kursus, kategori_materi, metode_pembelajaran, jenis_kursus, harga_kursus, thumbnail_kursus, tanggal_upload) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())");
+        $id_admin = 1;
+        $stmt = $conn->prepare("INSERT INTO `kursus`(`id_mentor`, `judul`, `kategori`, `harga`, `deskripsi`, `id_admin`, `jenis_kursus`, `gambar`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
         if ($stmt) {
-            $stmt->bind_param("isssssds", $id_mentor_saat_ini, $judul_kursus, $deskripsi_kursus, $kategori_materi, $metode_pembelajaran, $jenis_kursus, $harga_kursus, $thumbnail_path);
+            $stmt->bind_param("issisiss", $id_mentor_saat_ini, $judul_kursus, $kategori_materi, $harga_kursus, $deskripsi_kursus, $id_admin, $jenis_kursus, $thumbnail_path);
             if ($stmt->execute()) {
                 $_SESSION['success_message'] = "Kursus \"".htmlspecialchars($judul_kursus)."\" berhasil ditambahkan!";
             } else {
