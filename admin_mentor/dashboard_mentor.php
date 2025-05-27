@@ -30,7 +30,7 @@ if ($stmt_count) {
 <?php require '../head/head.php'; // ?>
 <style>
     .dashboard-hero {
-        background: linear-gradient(to right, #28a745, #218838); /* Warna hijau untuk mentor */
+        background: linear-gradient(to right, #007bff, #0056b3); /* Warna hijau untuk mentor */
         color: white;
         padding: 40px 20px;
         margin-bottom: 30px;
@@ -68,7 +68,7 @@ if ($stmt_count) {
     <?php require '../komponen/sidebar.php'; // Gunakan sidebar umum atau buat sidebar_mentor.php ?>
     <?php require '../komponen/nav.php'; // Gunakan nav.php yang sudah disesuaikan ?>
 
-    <main class="mt-5 pt-4">
+    <main class="mt-3 pt-2">
         <div class="container-fluid px-4">
             <div class="dashboard-hero text-center">
                 <h1>Dashboard Mentor</h1>
