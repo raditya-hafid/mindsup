@@ -6,6 +6,6 @@ unset($_SESSION['role']);
 unset($_SESSION['email']); // Jika ada
 // session_destroy(); // Alternatif untuk menghapus semua data sesi
 
-header("Location: ../landing page/pertama.php"); //
+header("Location: ../landing page/index.php"); //
 exit();
 ?>
