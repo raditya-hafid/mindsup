@@ -1,12 +1,10 @@
 <?php
 session_start(); // Mulai session jika belum
-require '../komponen/koneksi.php'; // Path untuk koneksi database
+require '../komponen/koneksi.php';
 
-// Ambil semua data kursus dari database
 $list_kursus = [];
-// Query untuk mengambil data kursus termasuk kategori
-// Menggunakan nama kolom: id_kursus, judul, deskripsi, gambar, kategori
-$stmt = $conn->prepare("SELECT id_kursus, judul, deskripsi, gambar, kategori FROM kursus ORDER BY id_kursus DESC");
+// Ambil juga kolom 'harga' dari tabel kursus
+$stmt = $conn->prepare("SELECT id_kursus, judul, deskripsi, gambar, kategori, harga FROM kursus ORDER BY id_kursus DESC"); // Tambahkan 'harga'
 if ($stmt) {
     $stmt->execute();
     $result = $stmt->get_result();
@@ -19,10 +17,10 @@ $conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="id">
-<?php require '../head/head.php'; // Path untuk head HTML ?>
+<?php require '../head/head.php'; ?>
 <body>
-    <?php require '../komponen/sidebar.php'; // Path untuk sidebar ?>
-    <?php require '../komponen/nav.php'; // Path untuk navigasi ?>
+    <?php require '../komponen/sidebar.php'; ?>
+    <?php require '../komponen/nav.php'; // Pastikan nav.php memulai session jika belum ?>
 
     <main class="mt-5 pt-4">
         <div class="container-fluid featured-courses" id="courses">
@@ -43,28 +41,24 @@ $conn->close();
                             <div class="rounded panel-course h-100">
                                 <div class="course-image-container">
                                     <?php
-                                    // Ambil path gambar dari database (misal: 'uploads/thumbnails/namafile.jpg')
-                                    $db_thumbnail_path = $kursus['gambar'];
+                                    $db_thumbnail_path = $kursus['gambar'] ?? '';
+                                    $judul_kursus_alt = $kursus['judul'] ?? 'Judul Kursus';
+                                    $html_image_src_candidate = '../' . ltrim(htmlspecialchars($db_thumbnail_path), '/');
+                                    $server_path_to_check_candidate = realpath(__DIR__ . '/../' . ltrim($db_thumbnail_path, '/'));
+                                    $final_image_src = '../asset/placeholder_image.png';
+                                    $alt_text = $judul_kursus_alt . " (Placeholder)";
 
-                                    // Path relatif untuk tag <img> dari lokasi courses/index.php
-                                    $html_image_src = '../' . $db_thumbnail_path;
-
-                                    // Path absolut di server untuk pemeriksaan file_exists()
-                                    // __DIR__ adalah direktori dari file courses/index.php (C:\...\mindsup\courses)
-                                    // Jadi, __DIR__ . '/../' akan mengarah ke C:\...\mindsup\
-                                    $server_image_path = realpath(__DIR__ . '/../' . $db_thumbnail_path);
-                                    
-                                    $final_image_src = '../uploads/thumbnails/thumb_6836dc8f046e58.08440246_sepertiga-gletser-himalaya-terancam-cair-1-9-miliar-orang-bisa-kehilangan-sumber-air-f1BYCdfkqF.jpeg'; // Default ke placeholder
-
-                                    if (!empty($kursus['gambar']) && file_exists($kursus['gambar'])) {
-                                        $final_image_src = $kursus['gambar'];
+                                    if (!empty($db_thumbnail_path) && $server_path_to_check_candidate && file_exists($server_path_to_check_candidate)) {
+                                        $final_image_src = $html_image_src_candidate;
+                                        $alt_text = $judul_kursus_alt;
                                     }
                                     ?>
-                                    <img src="<?php echo $final_image_src; ?>" alt="<?php echo htmlspecialchars($kursus['judul'] ?? 'Judul Kursus'); ?>" class="img-fluid rounded-top course-thumbnail">
-                                    
+                                    <img src="<?php echo $final_image_src; ?>" alt="<?php echo htmlspecialchars($alt_text); ?>" class="img-fluid rounded-top course-thumbnail">
                                     <div class="course-image-overlay">
-                                        <i class="bi bi-eye-fill overlay-icon"></i>
-                                        <span class="overlay-text">Lihat Detail</span>
+                                        <a href="../detail_kursus.php?id=<?php echo $kursus['id_kursus']; ?>" class="text-white text-decoration-none d-flex flex-column align-items-center justify-content-center h-100">
+                                            <i class="bi bi-eye-fill overlay-icon"></i>
+                                            <span class="overlay-text">Lihat Detail</span>
+                                        </a>
                                     </div>
                                     <?php if (!empty($kursus['kategori'])) : ?>
                                         <span class="course-category-badge"><?php echo htmlspecialchars($kursus['kategori']); ?></span>
@@ -82,9 +76,21 @@ $conn->close();
                                         }
                                         ?>
                                     </p>
-                                    <a href="../detail_kursus.php?id=<?php echo $kursus['id_kursus']; ?>" class="btn btn-outline-primary mt-auto course-button">
-                                        Pelajari Lebih Lanjut <i class="bi bi-arrow-right-short"></i>
-                                    </a>
+                                    <div class="mt-auto d-flex justify-content-between align-items-center">
+                                        <a href="../detail_kursus.php?id=<?php echo $kursus['id_kursus']; ?>" class="btn btn-sm btn-outline-primary course-button-detail">
+                                            Pelajari <i class="bi bi-arrow-right-short"></i>
+                                        </a>
+                                        <form action="../keranjang_aksi.php" method="POST" style="margin-bottom: 0;">
+                                            <input type="hidden" name="id_kursus" value="<?php echo $kursus['id_kursus']; ?>">
+                                            <input type="hidden" name="nama_kursus" value="<?php echo htmlspecialchars($kursus['judul'] ?? 'Nama Kursus'); ?>">
+                                            <input type="hidden" name="harga_kursus" value="<?php echo floatval($kursus['harga'] ?? 0); ?>">
+                                            <input type="hidden" name="gambar_kursus" value="<?php echo htmlspecialchars($db_thumbnail_path); ?>">
+                                            <input type="hidden" name="action" value="tambah">
+                                            <button type="submit" class="btn btn-sm btn-success course-button-keranjang" title="Tambah ke Keranjang">
+                                                <i class="bi bi-cart-plus-fill"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -98,7 +104,7 @@ $conn->close();
         </div>
     </main>
 
-    <?php require '../komponen/footer.php'; // Path untuk footer ?>
+    <?php require '../komponen/footer.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
