@@ -48,8 +48,8 @@ $conn->close();
                                     $final_image_src = '../asset/placeholder_image.png';
                                     $alt_text = $judul_kursus_alt . " (Placeholder)";
 
-                                    if (!empty($db_thumbnail_path) && $server_path_to_check_candidate && file_exists($server_path_to_check_candidate)) {
-                                        $final_image_src = $html_image_src_candidate;
+                                    if (!empty($kursus['gambar']) && file_exists($kursus['gambar'])) {
+                                        $final_image_src = $kursus['gambar'];
                                         $alt_text = $judul_kursus_alt;
                                     }
                                     ?>
