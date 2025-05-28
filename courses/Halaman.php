@@ -56,7 +56,7 @@ $conn->close();
                                     
                                     $final_image_src = '../uploads/thumbnails/thumb_6836dc8f046e58.08440246_sepertiga-gletser-himalaya-terancam-cair-1-9-miliar-orang-bisa-kehilangan-sumber-air-f1BYCdfkqF.jpeg'; // Default ke placeholder
 
-                                    if (!empty($kursus['gambar'])) {
+                                    if (!empty($kursus['gambar']) && file_exists($kursus['gambar'])) {
                                         $final_image_src = $kursus['gambar'];
                                     }
                                     ?>

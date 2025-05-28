@@ -149,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
 
         $stmt = $conn->prepare("UPDATE kursus SET id_kursus=?, id_mentor=?, judul=?, kategori=?, harga=?, deskripsi=?, id_admin=?, jenis_kursus=?, gambar=? WHERE id_kursus=? AND id_mentor=?");
         if ($stmt) {
-            $stmt->bind_param("iissisissii", $id_kursus, $id_mentor_saat_ini, $judul_kursus, $kategori_materi, $harga_kursus, $deskripsi_kursus, $id_admin, $jenis_kursus, $thumbnail_path, $id_kursus, $id_mentor_saat_ini);
+            $stmt->bind_param("iissisissii", $id_kursus, $id_mentor_saat_ini, $judul_kursus, $kategori_materi, $harga_kursus, $deskripsi_kursus, $id_admin, $jenis_kursus, $new_thumbnail_path, $id_kursus, $id_mentor_saat_ini);
             if ($stmt->execute()) {
                 $_SESSION['success_message'] = "Kursus \"".htmlspecialchars($judul_kursus)."\" berhasil diperbarui!";
             } else {
@@ -164,7 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
     }
 
     // DELETE
-    elseif ($action == 'delete') {
+    elseif ($action == '.') {
         if (empty(trim($_POST['id_kursus'])) || !is_numeric($_POST['id_kursus'])) {
             $_SESSION['error_message'] = "ID Kursus tidak valid untuk dihapus.";
             header("Location: kelola_kursus.php");

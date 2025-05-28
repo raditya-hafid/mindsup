@@ -81,8 +81,8 @@ if ($stmt) {
                                 <tr>
                                     <td><?php echo $no++; ?></td>
                                     <td>
-                                        <?php if(!empty($kursus['thumbnail_kursus']) && file_exists($kursus['thumbnail_kursus'])): ?>
-                                            <img src="<?php echo htmlspecialchars($kursus['thumbnail_kursus']); ?>" alt="Thumbnail" class="thumbnail-preview">
+                                        <?php if(!empty($kursus['gambar']) && file_exists($kursus['gambar'])): ?>
+                                            <img src="<?php echo htmlspecialchars($kursus['gambar']); ?>" alt="Thumbnail" class="thumbnail-preview">
                                         <?php else: ?>
                                             <small class="text-muted">N/A</small>
                                         <?php endif; ?>
