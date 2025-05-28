@@ -28,8 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // 1. Coba login sebagai Siswa
     // Asumsi siswa login dengan email_siswa
-    $stmt_siswa = mysqli_prepare($conn, "SELECT id_siswa, username, email_siswa, password FROM siswa WHERE email_siswa = ?");
-    mysqli_stmt_bind_param($stmt_siswa, "s", $email_or_username);
+    $stmt_siswa = mysqli_prepare($conn, "SELECT id_siswa, username, email_siswa, password FROM siswa WHERE email_siswa = ? OR username = ?");
+    mysqli_stmt_bind_param($stmt_siswa, "ss", $email_or_username, $email_or_username);
     mysqli_stmt_execute($stmt_siswa);
     $result_siswa = mysqli_stmt_get_result($stmt_siswa);
 
