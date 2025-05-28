@@ -25,6 +25,7 @@ function uploadThumbnail($fileInputName, $uploadDir = "../uploads/thumbnails/") 
         $fileTmpPath = $_FILES[$fileInputName]['tmp_name'];
         $fileName = uniqid('thumb_', true) . '_' . basename(preg_replace("/[^a-zA-Z0-9\.\-\_]/", "", $_FILES[$fileInputName]["name"]));
         $targetFilePath = $targetDir . $fileName;
+        $imageFilePath = $targetDir . $fileName;
         $fileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
 
         // Cek ukuran file (misal maks 2MB)

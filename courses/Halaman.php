@@ -44,7 +44,7 @@ $conn->close();
                                 <div class="course-image-container">
                                     <?php
                                     // Ambil path gambar dari database (misal: 'uploads/thumbnails/namafile.jpg')
-                                    $db_thumbnail_path = htmlspecialchars($kursus['gambar'] ?? '');
+                                    $db_thumbnail_path = $kursus['gambar'];
 
                                     // Path relatif untuk tag <img> dari lokasi courses/index.php
                                     $html_image_src = '../' . $db_thumbnail_path;
@@ -54,10 +54,10 @@ $conn->close();
                                     // Jadi, __DIR__ . '/../' akan mengarah ke C:\...\mindsup\
                                     $server_image_path = realpath(__DIR__ . '/../' . $db_thumbnail_path);
                                     
-                                    $final_image_src = '../asset/placeholder_image.png'; // Default ke placeholder
+                                    $final_image_src = '../uploads/thumbnails/thumb_6836dc8f046e58.08440246_sepertiga-gletser-himalaya-terancam-cair-1-9-miliar-orang-bisa-kehilangan-sumber-air-f1BYCdfkqF.jpeg'; // Default ke placeholder
 
-                                    if (!empty($kursus['gambar']) && $server_image_path && file_exists($server_image_path)) {
-                                        $final_image_src = $html_image_src;
+                                    if (!empty($kursus['gambar'])) {
+                                        $final_image_src = $kursus['gambar'];
                                     }
                                     ?>
                                     <img src="<?php echo $final_image_src; ?>" alt="<?php echo htmlspecialchars($kursus['judul'] ?? 'Judul Kursus'); ?>" class="img-fluid rounded-top course-thumbnail">
