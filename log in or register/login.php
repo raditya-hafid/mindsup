@@ -6,6 +6,21 @@
     require '../head/head.php';
     require '../komponen/koneksi.php'; //
 
+    // Cek jika pengguna sudah login
+if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
+    // Alihkan berdasarkan peran
+    if ($_SESSION['role'] == 'siswa') {
+        header("Location: ../dashboard/dashboard.php"); //
+        exit();
+    } elseif ($_SESSION['role'] == 'mentor') {
+        header("Location: ../admin_mentor/dashboard_mentor.php"); //
+        exit();
+    } elseif ($_SESSION['role'] == 'admin') {
+        header("Location: ../admin_panel/dashboard_admin.php"); //
+        exit();
+    }
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email_or_username = $_POST['email_or_username']; // Ganti input name di form menjadi 'email_or_username'
     $password = $_POST['password'];
