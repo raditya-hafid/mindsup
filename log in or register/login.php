@@ -6,21 +6,6 @@
     require '../head/head.php';
     require '../komponen/koneksi.php'; //
 
-    // Cek jika pengguna sudah login
-if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
-    // Alihkan berdasarkan peran
-    if ($_SESSION['role'] == 'siswa') {
-        header("Location: ../dashboard/dashboard.php"); //
-        exit();
-    } elseif ($_SESSION['role'] == 'mentor') {
-        header("Location: ../admin_mentor/dashboard_mentor.php"); //
-        exit();
-    } elseif ($_SESSION['role'] == 'admin') {
-        header("Location: ../admin_panel/dashboard_admin.php"); //
-        exit();
-    }
-}
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email_or_username = $_POST['email_or_username']; // Ganti input name di form menjadi 'email_or_username'
     $password = $_POST['password'];
@@ -107,14 +92,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <?php
-    // session_start(); // Sudah di atas
-    require '../head/head.php'; //
-    // require '../komponen/koneksi.php'; // Sudah di atas
-    ?>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    /* CSS tambahan untuk menata ikon mata */
+    .password-container {
+        position: relative;
+        width: 100%; /* Pastikan ini sesuai dengan lebar input Anda */
+    }
+    .password-container .form-control { /* Menargetkan input Bootstrap di dalam container */
+        padding-right: 40px !important; /* Menambahkan padding di sisi kanan input agar ada ruang untuk ikon. !important mungkin diperlukan untuk menimpa gaya Bootstrap. */
+    }
+    .toggle-password {
+        position: absolute;
+        right: 10px; /* Jarak ikon dari kanan input */
+        top: 50%;
+        transform: translateY(-50%); /* Menyesuaikan posisi vertikal agar tepat di tengah */
+        cursor: pointer; /* Mengubah kursor menjadi pointer saat diarahkan ke ikon */
+        color: #6c757d; /* Warna ikon, disesuaikan dengan warna teks sekunder Bootstrap */
+        z-index: 10; /* Memastikan ikon berada di atas input */
+    }
+</style>
 </head>
 <body>
 <div class="modal modal-sheet position-static d-block bg-body-secondary p-4 py-md-5" tabindex="-1" role="dialog" id="modalSignin">
@@ -130,9 +128,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <input type="text" class="form-control rounded-3" name="email_or_username" id="floatingInput" placeholder="Email atau Username" required>
                         <label for="floatingInput">Email atau Username</label>
                     </div>
-                    <div class="form-floating mb-3">
+                    <div class="form-floating mb-3 password-container">
                         <input type="password" class="form-control rounded-3" name="password" id="floatingPassword" placeholder="Password" required>
                         <label for="floatingPassword">Password</label>
+                        <i class="fa-solid fa-eye-slash toggle-password" onclick="togglePassword('floatingPassword', this)"></i>
                     </div>
                     <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Log In</button>
                     <small class="text-body-secondary">Don’t have an account? <a href="register.php" class="text-primary fw-bold">Click here</a></small>
@@ -141,5 +140,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 </div>
+
+<script>
+function togglePassword(id, icon) {
+    const input = document.getElementById(id);
+    if (input.type === "password") {
+        input.type = "text";
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    } else {
+        input.type = "password";
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    }
+}
+</script>
+
 </body>
 </html>
