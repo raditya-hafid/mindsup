@@ -43,30 +43,25 @@ $conn->close();
                             <div class="rounded panel-course h-100">
                                 <div class="course-image-container">
                                     <?php
-                                    // ... di dalam loop foreach ...
-$db_thumbnail_path = htmlspecialchars($kursus['gambar'] ?? '');
-$display_thumbnail_path_relative = '../' . $db_thumbnail_path; // Path relatif untuk src HTML
+                                    // Ambil path gambar dari database (misal: 'uploads/thumbnails/namafile.jpg')
+                                    $db_thumbnail_path = htmlspecialchars($kursus['gambar'] ?? '');
 
-// Dapatkan path absolut untuk file_exists()
-// __DIR__ adalah direktori dari file courses/index.php saat ini
-$absolute_path_to_check = realpath(__DIR__ . '/' . $display_thumbnail_path_relative); 
-                            // atau bisa juga: __DIR__ . '/../uploads/thumbnails/' . basename($db_thumbnail_path)
-                            // jika $db_thumbnail_path hanya nama file, tapi kita asumsikan sudah full path relatif dari root
+                                    // Path relatif untuk tag <img> dari lokasi courses/index.php
+                                    $html_image_src = '../' . $db_thumbnail_path;
 
-echo "";
-echo "";
-echo "";
-echo "";
+                                    // Path absolut di server untuk pemeriksaan file_exists()
+                                    // __DIR__ adalah direktori dari file courses/index.php (C:\...\mindsup\courses)
+                                    // Jadi, __DIR__ . '/../' akan mengarah ke C:\...\mindsup\
+                                    $server_image_path = realpath(__DIR__ . '/../' . $db_thumbnail_path);
+                                    
+                                    $final_image_src = '../asset/placeholder_image.png'; // Default ke placeholder
 
-if (empty($kursus['gambar']) || !($absolute_path_to_check && file_exists($absolute_path_to_check))) {
-    $final_image_src = '../asset/placeholder_image.png'; 
-} else {
-    $final_image_src = $display_thumbnail_path_relative;
-}
-?>
-<img src="<?php echo $final_image_src; ?>" alt="<?php echo htmlspecialchars($kursus['judul'] ?? 'Judul Kursus'); ?>" class="img-fluid rounded-top course-thumbnail">
+                                    if (!empty($kursus['gambar']) && $server_image_path && file_exists($server_image_path)) {
+                                        $final_image_src = $html_image_src;
+                                    }
                                     ?>
-                                    <img src="<?php echo $kursus['gambar']; ?>" alt="<?php echo htmlspecialchars($kursus['judul'] ?? 'Judul Kursus'); ?>" class="img-fluid rounded-top course-thumbnail">
+                                    <img src="<?php echo $final_image_src; ?>" alt="<?php echo htmlspecialchars($kursus['judul'] ?? 'Judul Kursus'); ?>" class="img-fluid rounded-top course-thumbnail">
+                                    
                                     <div class="course-image-overlay">
                                         <i class="bi bi-eye-fill overlay-icon"></i>
                                         <span class="overlay-text">Lihat Detail</span>
