@@ -9,7 +9,7 @@
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $role = 'siswa'; // Default role untuk registrasi
 
-        // Pastikan tabel siswa Anda punya kolom 'role'
+        
         $sql = "INSERT INTO siswa (username, email_siswa, password, role) VALUES (?, ?, ?, ?)";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, "ssss", $username, $email, $password, $role);
