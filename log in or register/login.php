@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (mysqli_num_rows($result_mentor) === 1) {
             $row = mysqli_fetch_assoc($result_mentor);
-            // Untuk mentor, kita asumsikan password belum di-hash jika mengikuti contoh gambar Anda
+            // Untuk mentor, kita asumsikan password belum di-hash jika mengikuti contoh gambar
             // IDEALNYA SEMUA PASSWORD HARUS DI-HASH!
             // Jika password mentor sudah di-hash, gunakan password_verify()
             if ($password === $row['password']) { // Ganti dengan password_verify jika sudah di-hash
