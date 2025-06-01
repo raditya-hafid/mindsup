@@ -10,14 +10,24 @@
         $role = 'siswa'; // Default role untuk registrasi
 
         
-        $cek = mysqli_prepare($conn, "SELECT username from siswa where username =? ");
+        $cek = mysqli_prepare($conn, "SELECT username from siswa where username =?");
+        $cek2 =mysqli_prepare($conn, "SELECT  email_siswa from siswa where email_siswa =?");
+
         mysqli_stmt_bind_param($cek, "s", $username);
         mysqli_stmt_execute($cek);
         $result = mysqli_stmt_get_result($cek);
+        
+
+        mysqli_stmt_bind_param($cek2, "s", $email);
+        mysqli_stmt_execute($cek2);
+        $result2 = mysqli_stmt_get_result($cek2);
 
         if (mysqli_num_rows($result)>0) {
             $error = "username telah dipakai!";
-        }else{
+        }elseif(mysqli_num_rows($result2)>0){
+            $error2 = "email telah dipakai!";
+        }
+        else{
 
             $stmt = mysqli_prepare($conn, "INSERT INTO siswa (username, email_siswa, password, role) VALUES (?, ?, ?, ?)");
             mysqli_stmt_bind_param($stmt, "ssss", $username, $email, $password, $role);
@@ -33,6 +43,7 @@
         }
 
         mysqli_stmt_close($cek);
+        mysqli_stmt_close($cek2);
         
         
         
@@ -83,6 +94,14 @@
                 <input type="text" class="form-control rounded-3" name="username" id="floatingusername" placeholder="Username" required>
                 <label for="floatingusername">username</label>
             </div>
+
+            <?php if (!empty($error2)) : ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <?php echo $error2; ?>
+                    
+                </div>
+            <?php endif; ?>
+        
             <div class="form-floating mb-3">
                 <input type="email" class="form-control rounded-3" name="email" id="floatingemail" placeholder="name@example.com" required>
                 <label for="floatingemail">Email address</label>
