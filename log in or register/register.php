@@ -10,17 +10,32 @@
         $role = 'siswa'; // Default role untuk registrasi
 
         
-        $sql = "INSERT INTO siswa (username, email_siswa, password, role) VALUES (?, ?, ?, ?)";
-        $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "ssss", $username, $email, $password, $role);
+        $cek = mysqli_prepare($conn, "SELECT username from siswa where username =? ");
+        mysqli_stmt_bind_param($cek, "s", $username);
+        mysqli_stmt_execute($cek);
+        $result = mysqli_stmt_get_result($cek);
 
-        if (mysqli_stmt_execute($stmt)){
-            header("Location: login.php");
-            exit();
+        if (mysqli_num_rows($result)>0) {
+            $error = "username telah dipakai!";
         }else{
-            echo "Pendaftaran gagal: " . mysqli_error($conn);
+
+            $stmt = mysqli_prepare($conn, "INSERT INTO siswa (username, email_siswa, password, role) VALUES (?, ?, ?, ?)");
+            mysqli_stmt_bind_param($stmt, "ssss", $username, $email, $password, $role);
+
+            if (mysqli_stmt_execute($stmt)){
+                header("Location: login.php");
+                exit();
+            }else{
+                echo "Pendaftaran gagal: " . mysqli_error($conn);
+            }
+
+            mysqli_stmt_close($stmt);
         }
-        mysqli_stmt_close($stmt);
+
+        mysqli_stmt_close($cek);
+        
+        
+        
     }
     ?>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <style>
@@ -55,6 +70,15 @@
 
         <div class="modal-body p-5 pt-0">
             <form class="" method="POST" action="">
+
+            <?php if (!empty($error)) : ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <?php echo $error; ?>
+                    
+                </div>
+            <?php endif; ?>
+
+
             <div class="form-floating mb-3">
                 <input type="text" class="form-control rounded-3" name="username" id="floatingusername" placeholder="Username" required>
                 <label for="floatingusername">username</label>
