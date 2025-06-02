@@ -55,7 +55,7 @@ $conn->close();
                                     ?>
                                     <img src="<?php echo $final_image_src; ?>" alt="<?php echo htmlspecialchars($alt_text); ?>" class="img-fluid rounded-top course-thumbnail">
                                     <div class="course-image-overlay">
-                                        <a href="../log in or register/login.php" class="text-white text-decoration-none d-flex flex-column align-items-center justify-content-center h-100">
+                                        <a <?php if (isset($_SESSION['username'])) {echo '';} else {echo 'href="../log in or register/login.php"';} ?> class="text-white text-decoration-none d-flex flex-column align-items-center justify-content-center h-100">
                                             <i class="bi bi-eye-fill overlay-icon"></i>
                                             <span class="overlay-text">Lihat Detail</span>
                                         </a>
@@ -77,7 +77,7 @@ $conn->close();
                                         ?>
                                     </p>
                                     <div class="mt-auto d-flex justify-content-between align-items-center">
-                                        <a href="../log in or register/login.php" class="btn btn-sm btn-outline-primary course-button-detail">
+                                        <a <?php if (isset($_SESSION['username'])) {echo '';} else {echo 'href="../log in or register/login.php"';} ?> class="btn btn-sm btn-outline-primary course-button-detail">
                                             Pelajari <i class="bi bi-arrow-right-short"></i>
                                         </a>
                                         <form action="../keranjang_aksi.php" method="POST" style="margin-bottom: 0;">
