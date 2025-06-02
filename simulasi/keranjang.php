@@ -7,8 +7,9 @@ if (!isset($_SESSION['keranjang'])) {
 
 // Daftar kupon valid (bisa diambil dari database nantinya)
 $validCoupons = [
-    'JARINGANSALAWASE' => 20, //
-    'WEBCOURSE' => 20 //
+    'DISKON70' => 70,
+    'DISKON20' => 20,
+    'GRATIS' => 100
 ];
 
 $subtotal = 0;
