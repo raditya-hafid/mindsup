@@ -21,8 +21,14 @@ $result_kursus = mysqli_stmt_get_result($stmt_kursus);
             if (mysqli_num_rows($result_kursus) === 1) {
                 $row = mysqli_fetch_assoc($result_kursus);
 
+                $final_image_src = '../asset/placeholder_image.png';
+
+                if (!empty($row['gambar']) && file_exists($row['gambar'])) {
+                    $final_image_src = $row['gambar'];
+                }
+
                 echo "<div class=\"row\" style='margin-top: 70px;'>";
-                echo "<div class=\"col-3\"><img src='" . $row['gambar'] . "' alt='Uploaded Image' style='max-width: 100%;'></div>";
+                echo "<div class=\"col-3\"><img src='" . $final_image_src . "' alt='Uploaded Image' style='max-width: 100%;'></div>";
                 echo "<div class=\"col\"><table class=\"table\">";
                 echo "<tr><td width=\"200\"><p><b>Nama Course :</b></p></td><td><p>" . $row['judul'] . "</p></td></tr>";
                 echo "<tr><td class=\"teks-tabel\"><p><b>Deskripsi :</b></p></td><td><p>" . $row['deskripsi'] . "</p></td></tr>";
