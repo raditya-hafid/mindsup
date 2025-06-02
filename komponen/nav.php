@@ -40,9 +40,6 @@ session_start();
                       <li class="nav-item">
                           <a class="nav-link" href="../landing page/index.php#about">About</a>
                       </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="#">Programs/Content</a>
-                      </li>
                   </ul>
                   <div>
                   <div class="dropdown">
