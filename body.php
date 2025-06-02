@@ -153,20 +153,43 @@
     </div>
 
     <div class="row justify-content-md-center">
-      <div class="col-lg-4 col-md-6 mb-4">
-        <div class="rounded panel-course h-100">
-          <img src="..\asset\matematika.png" width="100%" height="auto" alt="Matematika" class="img-fluid rounded-top">
-          <div class="p-3 d-flex flex-column">
-            <h5 style="font-size: 20px; margin-top: 12px;" class="fw-semibold">Matematika</h5>
-            <p style="text-align: justify; font-size: 0.9rem;" class="text-muted">Belajar Matematika jadi mudah dan menyenangkan! Mulai dari operasi hitung dasar, pengukuran, hingga pengenalan bentuk-bentuk geometri.</p>
-            <a href="#" class="btn btn-outline-primary mt-auto">
-              Lihat Detail <i class="bi bi-arrow-right-short"></i>
-            </a>
-          </div>
-        </div>
-      </div>
 
-      <div class="col-lg-4 col-md-6 mb-4">
+    <?php
+      require '../komponen/koneksi.php';
+
+      $stmt_kursus = mysqli_prepare($conn, "SELECT * FROM kursus ORDER BY id_kursus DESC LIMIT 3");
+      mysqli_stmt_execute($stmt_kursus);
+      $result_kursus = mysqli_stmt_get_result($stmt_kursus);
+
+      if (mysqli_num_rows($result_kursus) > 0) {
+        $dataCourse = [];
+        while ($row = mysqli_fetch_assoc($result_kursus)) {
+          $dataCourse[] = $row;
+        }
+        
+        $courseFound = true;
+      } else {
+        $courseFound = false;
+      }
+    
+      if ($courseFound) {
+        $index = 0;
+        while ($index < count($dataCourse)) {
+          echo '<div class="col-lg-4 col-md-6 mb-4"><div class="rounded panel-course h-100">';
+          echo '<img src="' . $dataCourse[$index]['gambar'] . '" width="100%" height="auto" alt="Course Cover" class="img-fluid rounded-top"><div class="p-3 d-flex flex-column">';
+          echo '<h5 style="font-size: 20px; margin-top: 12px;" class="fw-semibold">' . $dataCourse[$index]['judul'] . '</h5>';
+          echo '<p style="text-align: justify; font-size: 0.9rem;" class="text-muted">' . $dataCourse[$index]['deskripsi'] . '</p>';
+          echo '<a href="#" class="btn btn-outline-primary mt-auto">Lihat Detail <i class="bi bi-arrow-right-short"></i></a>';
+          echo '</div></div></div>';
+
+          $index = $index + 1;
+        }
+      } else {
+        echo'<h3 style="text-align: center;">Belum ada course untuk ditampilkan</h3>';
+      }
+      ?>
+
+      <!-- <div class="col-lg-4 col-md-6 mb-4">
         <div class="rounded panel-course h-100">
           <img src="..\asset\ipaa.png" width="100%" height="auto" alt="IPA" class="img-fluid rounded-top">
           <div class="p-3 d-flex flex-column">
@@ -190,7 +213,7 @@
             </a>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <!-- Quote Section -->

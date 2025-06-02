@@ -164,7 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
     }
 
     // DELETE
-    elseif ($action == '.') {
+    elseif ($action == 'delete') {
         if (empty(trim($_POST['id_kursus'])) || !is_numeric($_POST['id_kursus'])) {
             $_SESSION['error_message'] = "ID Kursus tidak valid untuk dihapus.";
             header("Location: kelola_kursus.php");
@@ -174,7 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
         $thumbnail_to_delete = null;
 
         // Ambil path thumbnail untuk dihapus dari server
-        $stmt_get_thumb = $conn->prepare("SELECT thumbnail_kursus FROM kursus WHERE id_kursus = ? AND id_mentor = ?");
+        $stmt_get_thumb = $conn->prepare("SELECT gambar FROM kursus WHERE id_kursus = ? AND id_mentor = ?");
         if($stmt_get_thumb){
             $stmt_get_thumb->bind_param("ii", $id_kursus, $id_mentor_saat_ini);
             $stmt_get_thumb->execute();
