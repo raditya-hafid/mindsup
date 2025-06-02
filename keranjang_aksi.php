@@ -65,7 +65,7 @@ if (strpos($referer, 'keranjang_aksi.php') !== false) {
 
 // Jika aksi dari halaman keranjang, redirect ke keranjang
 if (isset($_POST['dari_keranjang'])) {
-    header("Location: ../simulasi/keranjang.php"); // Nantinya akan kita buat keranjang.php
+    header("Location: ./simulasi/keranjang.php"); // Nantinya akan kita buat keranjang.php
 } else {
     header("Location: " . $referer);
 }

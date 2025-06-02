@@ -5,9 +5,8 @@
             <label for="sidebar-toggle" class="sidebar-close">&times;</label>
             <div class="sidebar-content">
                 <div class="sidebar-heading">Menu</div>
-                <a href="#" class="sidebar-link"><i class="bi bi-house-door me-2"></i> Home</a>
-                <a href="#" class="sidebar-link"><i class="bi bi-book me-2"></i> All Courses</a>
-                <a href="#" class="sidebar-link"><i class="bi bi-star me-2"></i> Featured Courses</a>
+                <a href="../landing page/index.php" class="sidebar-link"><i class="bi bi-house-door me-2"></i> Home</a>
+                <a href="../courses/halaman.php" class="sidebar-link"><i class="bi bi-book me-2"></i> All Courses</a>
                 <a href="#" class="sidebar-link"><i class="bi bi-person me-2"></i> My Account</a>
             
                 

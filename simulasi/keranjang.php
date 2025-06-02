@@ -7,8 +7,9 @@ if (!isset($_SESSION['keranjang'])) {
 
 // Daftar kupon valid (bisa diambil dari database nantinya)
 $validCoupons = [
-    'JARINGANSALAWASE' => 20, //
-    'WEBCOURSE' => 20 //
+    'DISKON70' => 70,
+    'DISKON20' => 20,
+    'GRATIS' => 100
 ];
 
 $subtotal = 0;
@@ -118,7 +119,7 @@ if (isset($_POST['bayar_sekarang'])) {
 
         <?php if (empty($_SESSION['keranjang'])): ?>
             <div class="alert alert-warning text-center" role="alert">
-                Keranjang Anda masih kosong. <a href="../courses/index.php" class="alert-link">Mulai belanja sekarang!</a>
+                Keranjang Anda masih kosong. <a href="../courses/Halaman.php" class="alert-link">Mulai belanja sekarang!</a>
             </div>
         <?php else: ?>
             <div class="row">

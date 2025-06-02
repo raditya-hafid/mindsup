@@ -40,9 +40,6 @@ session_start();
                       <li class="nav-item">
                           <a class="nav-link" href="../landing page/index.php#about">About</a>
                       </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="#">Programs/Content</a>
-                      </li>
                   </ul>
                   <div>
                   <div class="dropdown">
@@ -58,7 +55,6 @@ session_start();
                                   echo "<li><a class=\"dropdown-item\" href=\"../dashboard/dashboard.php\"><i class=\"bi bi-speedometer2\"></i> Dashboard </a></li>";
                               }
                               
-                              echo "<li><a class=\"dropdown-item\" href=\"../input page/input.php\"><i class=\"bi bi-box-arrow-up\"></i> Upload</a></li>";
                               echo "<li><a class=\"dropdown-item\" href=\"../simulasi/keranjang.php\"><i class=\"bi bi-cart me-2\"></i> Keranjang</a></li>";
                               echo "<li><hr class=\"dropdown-divider\"></li>";
                               echo "<li><a class=\"dropdown-item\" href=\"../log in or register/logout.php\"><i class=\"bi bi-box-arrow-right me-2\"></i> Log out </a></li>";

@@ -22,7 +22,7 @@ $conn->close();
     <?php require '../komponen/sidebar.php'; ?>
     <?php require '../komponen/nav.php'; // Pastikan nav.php memulai session jika belum ?>
 
-    <main class="mt-5 pt-4">
+    <main class="mt-2 pt-1">
         <div class="container-fluid featured-courses" id="courses">
             <div style="text-align: center;" class="row justify-content-md-center">
                 <div class="col-md-9">
@@ -53,10 +53,11 @@ $conn->close();
                                         $alt_text = $judul_kursus_alt;
                                     }
                                     ?>
-                                    <img src="<?php echo $final_image_src; ?>" alt="<?php echo htmlspecialchars($alt_text); ?>" class="img-fluid rounded-top course-thumbnail">
+                                    
                                     <div class="course-image-overlay">
-                                        <a href="../detail_kursus.php?id=<?php echo $kursus['id_kursus']; ?>" class="text-white text-decoration-none d-flex flex-column align-items-center justify-content-center h-100">
-                                            <i class="bi bi-eye-fill overlay-icon"></i>
+                                        <a <?php if (isset($_SESSION['username'])) {echo '';} else {echo 'href="../log in or register/login.php"';} ?> class="text-white text-decoration-none d-flex flex-column align-items-center justify-content-center h-100">
+                                            <img src="<?php echo $final_image_src; ?>" alt="<?php echo htmlspecialchars($alt_text); ?>" class="img-fluid rounded-top course-thumbnail">    
+                                            <!-- <i class="bi bi-eye-fill overlay-icon"></i> -->
                                             <span class="overlay-text">Lihat Detail</span>
                                         </a>
                                     </div>
@@ -77,7 +78,7 @@ $conn->close();
                                         ?>
                                     </p>
                                     <div class="mt-auto d-flex justify-content-between align-items-center">
-                                        <a href="../detail_kursus.php?id=<?php echo $kursus['id_kursus']; ?>" class="btn btn-sm btn-outline-primary course-button-detail">
+                                        <a href="<?php if (isset($_SESSION['username'])) {echo 'detail_kursus.php?id=' . $kursus['id_kursus'];} else {echo '../log in or register/login.php';} ?>" class="btn btn-sm btn-outline-primary course-button-detail">
                                             Pelajari <i class="bi bi-arrow-right-short"></i>
                                         </a>
                                         <form action="../keranjang_aksi.php" method="POST" style="margin-bottom: 0;">
