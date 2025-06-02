@@ -9,22 +9,22 @@
     <div class="carousel-item active">
       <img src="../asset/inclass.jpg" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <h5>First slide label</h5>
-        <p>Some representative placeholder content for the first slide.</p>
+        <h5 style="text-shadow: 2px 2px 4px rgba(0,0,0,0.9);">Pembelajaran yang Menyenangkan dan Interaktif</h5>
+        <p style="text-shadow: 1px 1px 3px rgba(0,0,0,0.9);">Belajar jadi lebih seru dan mudah dipahami untuk anak-anak sekolah dasar.</p>
       </div>
     </div>
     <div class="carousel-item">
       <img src="../asset/bag.jpg" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <h5>Second slide label</h5>
-        <p>Some representative placeholder content for the second slide.</p>
+        <h5 style="text-shadow: 2px 2px 4px rgba(0,0,0,0.9);">Materi Lengkap dan Mudah Dipahami</h5>
+        <p style="text-shadow: 1px 1px 3px rgba(0,0,0,0.9);">Disusun oleh guru berpengalaman dengan bahasa yang sederhana dan visual yang menarik untuk anak-anak.</p>
       </div>
     </div>
     <div class="carousel-item">
       <img src="../asset/children.jpg" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <h5>Third slide label</h5>
-        <p>Some representative placeholder content for the third slide.</p>
+        <h5 style="text-shadow: 2px 2px 4px rgba(0,0,0,0.9);">Tumbuhkan Rasa Percaya Diri Anak</h5>
+        <p style="text-shadow: 1px 1px 3px rgba(0,0,0,0.9);">Bantu anak menguasai pelajaran sekolah dan tampil lebih percaya diri dengan pembelajaran bertahap dan menyenangkan.</p>
       </div>
     </div>
   </div>
@@ -153,7 +153,7 @@
     </div>
 
     <div class="row justify-content-md-center">
-      <div class="col-lg-4 col-md-6 mb-4">
+      <div style="cursor: pointer;" class="col-lg-4 col-md-6 mb-4">
         <div class="rounded panel-course h-100">
           <img src="..\asset\matematika.png" width="100%" height="auto" alt="Matematika" class="img-fluid rounded-top">
           <div class="p-3 d-flex flex-column">
@@ -166,7 +166,7 @@
         </div>
       </div>
 
-      <div class="col-lg-4 col-md-6 mb-4">
+      <div style="cursor: pointer;" class="col-lg-4 col-md-6 mb-4">
         <div class="rounded panel-course h-100">
           <img src="..\asset\ipaa.png" width="100%" height="auto" alt="IPA" class="img-fluid rounded-top">
           <div class="p-3 d-flex flex-column">
@@ -179,7 +179,7 @@
         </div>
       </div>
 
-      <div class="col-lg-4 col-md-6 mb-4">
+      <div style="cursor: pointer;" class="col-lg-4 col-md-6 mb-4">
         <div class="rounded panel-course h-100">
           <img src="..\asset\ips.png" width="100%" height="auto" alt="IPS" class="img-fluid rounded-top">
           <div class="p-3 d-flex flex-column">

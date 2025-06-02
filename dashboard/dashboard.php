@@ -68,6 +68,7 @@ $courses = [
         border-radius: .50rem; /* Radius border lebih besar */
         overflow: hidden; /* Agar gambar tidak keluar dari card */
         background-color: #fff;
+        cursor: pointer;
     }
     .course-card:hover {
         transform: translateY(-5px);
