@@ -22,7 +22,7 @@ $conn->close();
     <?php require '../komponen/sidebar.php'; ?>
     <?php require '../komponen/nav.php'; // Pastikan nav.php memulai session jika belum ?>
 
-    <main class="mt-3 pt-2">
+    <main class="mt-2 pt-1">
         <div class="container-fluid featured-courses" id="courses">
             <div style="text-align: center;" class="row justify-content-md-center">
                 <div class="col-md-9">
