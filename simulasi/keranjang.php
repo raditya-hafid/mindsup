@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+require '../komponen/koneksi.php';
+
 if (!isset($_SESSION['keranjang'])) {
     $_SESSION['keranjang'] = [];
 }
@@ -21,7 +23,7 @@ $pesanErrorPembayaran = '';
 
 // Hitung subtotal
 foreach ($_SESSION['keranjang'] as $item) {
-    $subtotal += $item['harga'] * $item['kuantitas'];
+    $subtotal += $item['harga'];
 }
 
 // Proses kupon jika dikirimkan
@@ -61,27 +63,43 @@ if (isset($_POST['bayar_sekarang'])) {
             $_SESSION['transactions'] = [];
         }
         $selectedItemsForTransaction = [];
+        $selectedItemsId = [];
         foreach($_SESSION['keranjang'] as $cartItem) {
-            $selectedItemsForTransaction[] = $cartItem['nama'] . " (x" . $cartItem['kuantitas'] . ")";
+            $selectedItemsForTransaction[] = $cartItem['nama'];
+            $selectedItemsId[] = $cartItem['id'];
         }
 
         $transaction = [
-            'date' => date('Y-m-d H:i:s'),
-            'items' => $selectedItemsForTransaction, // Array nama item
+            'date' => date('Y-m-d'),
+            'items' => json_encode($selectedItemsForTransaction), // Array nama item
             'payment_method' => $_POST['payment_method'],
             'subtotal' => $subtotal,
-            'discount_code' => $_SESSION['kode_kupon_aktif'] ?? null,
+            'discount_code' => $_SESSION['kode_kupon_aktif'] ?? "",
             'discount_percentage' => $discountPersen,
             'discount_amount' => $discountAmount,
             'total' => $total
         ];
-        array_unshift($_SESSION['transactions'], $transaction);
 
         // Kosongkan keranjang setelah berhasil bayar
         $_SESSION['keranjang'] = [];
         unset($_SESSION['kode_kupon_aktif']);
         unset($_SESSION['diskon_persen_aktif']);
-        
+
+        $stmt = mysqli_prepare($conn, "INSERT INTO `pembelian` (`id_siswa`, `status`, `tanggal_beli`, `items`, `pay_method`, `subtotal`, `discount_code`, `discount_persen`, `discount_amount`, `total`) VALUES (?, 'Sukses', ?, ?, ?, ?, ?, ?, ?, ?)");
+        mysqli_stmt_bind_param($stmt, "isssisiii", $_SESSION['user_id'], $transaction['date'], $transaction['items'], $transaction['payment_method'], $transaction['subtotal'], $transaction['discount_code'], $transaction['discount_percentage'], $transaction['discount_amount'], $transaction['total']);
+        mysqli_stmt_execute($stmt);
+
+        $stmt = mysqli_prepare($conn, "SELECT `id_pembelian` FROM `pembelian` ORDER BY `id_pembelian` DESC LIMIT 1");
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $row = mysqli_fetch_assoc($result);
+
+        foreach ($selectedItemsId as $id_kursus_transaksi) {
+            $stmt = mysqli_prepare($conn, "INSERT INTO `detail_pembelian`(`id_kursus`, `id_pembelian`) VALUES (?, ?)");
+            mysqli_stmt_bind_param($stmt, "iis", $id_kursus_transaksi, $row['id_pembelian']);
+            mysqli_stmt_execute($stmt);
+        }
+
         // Redirect ke halaman sukses atau tampilkan pesan sukses
         $_SESSION['pesan_sukses_pembayaran'] = "Pembayaran berhasil! Terima kasih telah melakukan pembelian.";
         header("Location: keranjang.php"); // Kembali ke keranjang untuk lihat pesan sukses / riwayat
@@ -146,9 +164,10 @@ if (isset($_POST['bayar_sekarang'])) {
                                                     <?php 
                                                     // Path gambar relatif dari keranjang.php ke root, lalu ke gambar
                                                     // Asumsi $item['gambar'] berisi 'uploads/subfolder/file.jpg'
-                                                    $gambar_display = '../' . ltrim(htmlspecialchars($item['gambar']), '/');
-                                                    if (empty($item['gambar']) || !file_exists($gambar_display)) {
+                                                    if (empty($item['gambar']) || !file_exists($item['gambar'])) {
                                                         $gambar_display = '../asset/placeholder_image.png';
+                                                    } else {
+                                                        $gambar_display = $item['gambar'];
                                                     }
                                                     ?>
                                                     <img src="<?php echo $gambar_display; ?>" alt="<?php echo htmlspecialchars($item['nama']); ?>" style="width: 80px; height: auto; border-radius: .25rem;">

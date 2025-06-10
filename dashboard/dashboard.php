@@ -1,6 +1,8 @@
 <?php
 session_start(); // Mulai session
 
+require '../komponen/koneksi.php';
+
 // Periksa apakah pengguna sudah login
 // Jika tidak ada session username, redirect ke halaman login
 if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
@@ -8,35 +10,17 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
     exit();
 }
 
-// Data kursus (contoh, nantinya bisa diambil dari database)
-// Semua progress diatur ke 0
-$courses = [
-    [
-        'id' => 1,
-        'title' => 'Matematika',
-        'description' => 'Belajar Matematika jadi mudah dan menyenangkan! Mulai dari operasi hitung dasar, pengukuran, hingga pengenalan bentuk-bentuk geometri.',
-        'image' => '../asset/matematika.png', // Ganti dengan path gambar yang sesuai
-        'progress' => 0, // Progress diatur ke 0
-        'link' => '#' // Link ke halaman detail kursus
-    ],
-    [
-        'id' => 2,
-        'title' => 'Ilmu Pengetahuan Alam (IPA)',
-        'description' => 'Eksplorasi dunia sains melalui materi-materi seru seperti sistem tubuh manusia, energi dan perubahannya, serta makhluk hidup dan lingkungannya. Belajar IPA kini lebih menarik dengan gambar dan kuis interaktif.',
-        'image' => '../asset/ipaa.png', // Ganti dengan path gambar yang sesuai
-        'progress' => 25, // Progress diatur ke 0
-        'link' => '#'
-    ],
-//    [
-//         'id' => 3,
-//         'title' => 'Ilmu Pengetahuan Sosial (IPS)',
-//         'description' => 'Kenali lingkungan sosial dan budaya di sekitar kita dengan cara yang menarik.',
-//         'image' => '../asset/ips.png', // Ganti dengan path gambar yang sesuai
-//         'progress' => 0, // Progress diatur ke 0
-//         'link' => '#'
-//     ] 
-    // Tambahkan kursus lain di sini jika perlu, dengan progress 0
-];
+$stmt = mysqli_prepare($conn, "SELECT k.id_kursus, k.judul, k.deskripsi, k.gambar FROM siswa s JOIN pembelian p ON s.id_siswa = p.id_siswa JOIN detail_pembelian dp ON p.id_pembelian = dp.id_pembelian JOIN kursus k ON dp.id_kursus = k.id_kursus WHERE s.id_siswa = ?;");
+mysqli_stmt_bind_param($stmt, "i", $_SESSION['user_id']);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+
+$courses = [];
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $courses[] = $row;
+    }
+}
 
 // Jika sudah login, tampilkan halaman dashboard
 ?>
@@ -135,22 +119,10 @@ $courses = [
                     <?php foreach ($courses as $course): ?>
                         <div class="col-md-6 col-lg-4 mb-4">
                             <div class="card course-card h-100">
-                                <img src="<?php echo htmlspecialchars($course['image']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($course['title']); ?>">
+                                <img src="<?php echo htmlspecialchars($course['gambar']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($course['judul']); ?>">
                                 <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title"><?php echo htmlspecialchars($course['title']); ?></h5>
-                                    <p class="card-text"><?php echo htmlspecialchars($course['description']); ?></p>
-                                    
-                                    <?php if (isset($course['progress'])): ?>
-                                    <div class="mt-auto">
-                                        <p class="mb-1"><small>Progres: <?php echo $course['progress']; ?>%</small></p>
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" style="width: <?php echo $course['progress']; ?>%;" aria-valuenow="<?php echo $course['progress']; ?>" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                    <?php endif; ?>
-                                    <a href="<?php echo htmlspecialchars($course['link']); ?>" class="btn btn-primary btn-course w-100 <?php echo isset($course['progress']) ? '' : 'mt-auto'; ?>">
-                                        <?php echo ($course['progress'] < 100 && $course['progress'] > 0) ? 'Lanjutkan Belajar' : (($course['progress'] == 100) ? 'Ulas Kembali' : 'Mulai Belajar'); ?>
-                                    </a>
+                                    <h5 class="card-title"><?php echo htmlspecialchars($course['judul']); ?></h5>
+                                    <p class="card-text"><?php echo htmlspecialchars($course['deskripsi']); ?></p>
                                 </div>
                             </div>
                         </div>
