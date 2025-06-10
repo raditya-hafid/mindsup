@@ -49,8 +49,10 @@ session_start();
                       <ul class="dropdown-menu dropdown-menu-end">
                           <?php
                           if (isset($_SESSION['username'])) {
-                              if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'mentor'){
+                              if ($_SESSION['role'] === 'mentor'){
                                   echo "<li><a class=\"dropdown-item\" href=\"../admin_mentor/dashboard_mentor.php\"><i class=\"bi bi-speedometer2\"></i> Dashboard </a></li>";
+                              } elseif ($_SESSION['role'] === 'admin') {
+                                    echo "<li><a class=\"dropdown-item\" href=\"../admin_mentor/dashboard_admin.php\"><i class=\"bi bi-speedometer2\"></i> Dashboard </a></li>";
                               } else {
                                   echo "<li><a class=\"dropdown-item\" href=\"../dashboard/dashboard.php\"><i class=\"bi bi-speedometer2\"></i> Dashboard </a></li>";
                               }

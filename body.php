@@ -176,7 +176,9 @@
         $index = 0;
         while ($index < count($dataCourse)) {
           echo '<div style="cursor: pointer;" class="col-lg-4 col-md-6 mb-4"><div class="rounded panel-course h-100">';
-          echo '<img src="' . $dataCourse[$index]['gambar'] . '" width="100%" height="auto" alt="Course Cover" class="img-fluid rounded-top"><div class="p-3 d-flex flex-column">';
+          
+          $gambar = (!empty($dataCourse[$index]['gambar']) && file_exists($dataCourse[$index]['gambar'])) ? $dataCourse[$index]['gambar'] : "../asset/placeholder_image.png";
+          echo '<img src=' . $gambar . ' width="100%" height="auto" alt="Course Cover" class="img-fluid rounded-top"><div class="p-3 d-flex flex-column">';
           echo '<h5 style="font-size: 20px; margin-top: 12px;" class="fw-semibold">' . $dataCourse[$index]['judul'] . '</h5>';
           echo '<p style="text-align: justify; font-size: 0.9rem;" class="text-muted">' . $dataCourse[$index]['deskripsi'] . '</p>';
           echo '<a href="#" class="btn btn-outline-primary mt-auto">Lihat Detail <i class="bi bi-arrow-right-short"></i></a>';
