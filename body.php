@@ -220,7 +220,7 @@
 
     <!-- Quote Section -->
     <div class="container quote-section">
-      <p>"Quote: Invest in your knowledge—it yields the best returns for tomorrow."</p>
+      <p>"Invest in your knowledge—it yields the best returns for tomorrow."</p>
       <p>— Benjamin Franklin</p>
     </div>
   </div>
