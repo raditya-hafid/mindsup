@@ -10,7 +10,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
     exit();
 }
 
-$stmt = mysqli_prepare($conn, "SELECT k.id_kursus, k.judul, k.deskripsi, k.gambar FROM siswa s JOIN pembelian p ON s.id_siswa = p.id_siswa JOIN detail_pembelian dp ON p.id_pembelian = dp.id_pembelian JOIN kursus k ON dp.id_kursus = k.id_kursus WHERE s.id_siswa = ?;");
+$stmt = mysqli_prepare($conn, "SELECT k.id_kursus, k.judul, k.deskripsi, k.gambar FROM siswa s JOIN pembelian p ON s.id_siswa = p.id_siswa JOIN detail_pembelian dp ON p.id_pembelian = dp.id_pembelian JOIN kursus k ON dp.id_kursus = k.id_kursus WHERE s.id_siswa = ? AND p.status = 'Sukses';");
 mysqli_stmt_bind_param($stmt, "i", $_SESSION['user_id']);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);

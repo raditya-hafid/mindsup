@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['role'] = 'admin';
                 $login_success = true;
                 // Buat halaman dashboard admin jika perlu, misal: ../admin_panel/dashboard_admin.php
-                header("Location: ../admin_panel/dashboard_admin.php"); // Ganti ke dashboard admin
+                header("Location: ../admin_mentor/dashboard_admin.php"); // Ganti ke dashboard admin
                 exit();
             }
         }
