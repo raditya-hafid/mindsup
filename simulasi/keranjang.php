@@ -66,7 +66,7 @@ if (isset($_POST['bayar_sekarang'])) {
         $selectedItemsId = [];
         foreach($_SESSION['keranjang'] as $cartItem) {
             $selectedItemsForTransaction[] = $cartItem['nama'];
-            $selectedItemsId[] = $cartItem['id'];
+            $selectedItemsId[] = (int)$cartItem['id'];
         }
 
         $transaction = [
@@ -89,15 +89,15 @@ if (isset($_POST['bayar_sekarang'])) {
         mysqli_stmt_bind_param($stmt, "isssisiii", $_SESSION['user_id'], $transaction['date'], $transaction['items'], $transaction['payment_method'], $transaction['subtotal'], $transaction['discount_code'], $transaction['discount_percentage'], $transaction['discount_amount'], $transaction['total']);
         mysqli_stmt_execute($stmt);
 
-        $stmt = mysqli_prepare($conn, "SELECT `id_pembelian` FROM `pembelian` ORDER BY `id_pembelian` DESC LIMIT 1");
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
+        $stmt2 = mysqli_prepare($conn, "SELECT `id_pembelian` FROM `pembelian` ORDER BY `id_pembelian` DESC LIMIT 1");
+        mysqli_stmt_execute($stmt2);
+        $result = mysqli_stmt_get_result($stmt2);
         $row = mysqli_fetch_assoc($result);
 
         foreach ($selectedItemsId as $id_kursus_transaksi) {
-            $stmt = mysqli_prepare($conn, "INSERT INTO `detail_pembelian`(`id_kursus`, `id_pembelian`) VALUES (?, ?)");
-            mysqli_stmt_bind_param($stmt, "iis", $id_kursus_transaksi, $row['id_pembelian']);
-            mysqli_stmt_execute($stmt);
+            $stmt3 = mysqli_prepare($conn, "INSERT INTO `detail_pembelian`(`id_kursus`, `id_pembelian`) VALUES (?, ?)");
+            mysqli_stmt_bind_param($stmt3, "ii", $id_kursus_transaksi, $row['id_pembelian']);
+            mysqli_stmt_execute($stmt3);
         }
 
         // Redirect ke halaman sukses atau tampilkan pesan sukses
