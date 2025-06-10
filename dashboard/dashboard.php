@@ -130,7 +130,6 @@ if (mysqli_num_rows($result) > 0) {
                 <?php else: ?>
                     <div class="col-12">
                          <div class="col-12 text-center">
-                            <img src="../asset/empty_course_placeholder.png" alt="Belum ada kursus" style="max-width: 250px; margin-bottom: 20px;">
                             <h4>Anda Belum Memiliki Kursus</h4>
                             <p class="text-muted">Sepertinya Anda belum mendaftar di kursus manapun. Jangan khawatir!</p>
                             <a href="../landing page/pertama.php#courses" class="btn btn-lg btn-success">
