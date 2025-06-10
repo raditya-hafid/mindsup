@@ -1,8 +1,24 @@
+<?php
+session_start();
+    if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
+        // Alihkan ke dashboard yang sesuai berdasarkan peran (role)
+        if ($_SESSION['role'] === 'siswa') {
+            header("Location: ../dashboard/dashboard.php"); //
+            exit(); // Hentikan eksekusi skrip
+        } elseif ($_SESSION['role'] === 'mentor') {
+            header("Location: ../admin_mentor/dashboard_mentor.php"); //
+            exit(); // Hentikan eksekusi skrip
+        } elseif ($_SESSION['role'] === 'admin') {
+            header("Location: ../admin_panel/dashboard_admin.php"); //
+            exit(); // Hentikan eksekusi skrip
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <?php
-    session_start();
+    
     require '../head/head.php';
     require '../komponen/koneksi.php'; //
 
