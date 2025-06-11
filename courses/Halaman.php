@@ -1,12 +1,22 @@
 <?php
-session_start(); // Mulai session jika belum
+session_start();
 require '../komponen/koneksi.php';
 
 $list_kursus = [];
-// Ambil juga kolom 'harga' dari tabel kursus
-$stmt = $conn->prepare("SELECT id_kursus, judul, deskripsi, gambar, kategori, harga FROM kursus ORDER BY id_kursus DESC"); // Tambahkan 'harga'
-if ($stmt) {
+
+$kategori = isset($_GET['kategori']) ? $_GET['kategori'] : '';
+
+// Siapkan query berdasarkan filter
+if ($kategori) {
+    $stmt = $conn->prepare("SELECT k.id_kursus, k.judul, k.deskripsi, k.gambar, k.kategori, k.harga, m.username AS mentor FROM kursus k JOIN mentor m ON k.id_mentor = m.id_mentor WHERE kategori = ? ORDER BY id_kursus DESC");
+    $stmt->bind_param("s", $kategori);
     $stmt->execute();
+} else {
+    $stmt = $conn->prepare("SELECT k.id_kursus, k.judul, k.deskripsi, k.gambar, k.kategori, k.harga, m.username AS mentor FROM kursus k JOIN mentor m ON k.id_mentor = m.id_mentor ORDER BY id_kursus DESC"); // Tambahkan 'harga'
+    $stmt->execute();
+}
+
+if ($stmt) {
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
         $list_kursus[] = $row;
@@ -46,6 +56,28 @@ if ($stmt2) {
                     </p>
                 </div>
             </div>
+
+            <div class="container mt-4">
+                <form method="GET" action="" class="row g-3">
+                    <div class="col-md-4">
+                        <label for="kategori" class="form-label">Filter Kategori Kursus</label>
+                        <select class="form-select" id="kategori" name="kategori">
+                            <option value="">-- Semua Kategori --</option>
+                            <option value="Matematika" <?= (isset($_GET['kategori']) && $_GET['kategori'] == 'Matematika') ? 'selected' : '' ?>>Matematika</option>
+                            <option value="IPA" <?= (isset($_GET['kategori']) && $_GET['kategori'] == 'IPA') ? 'selected' : '' ?>>IPA</option>
+                            <option value="IPS" <?= (isset($_GET['kategori']) && $_GET['kategori'] == 'IPS') ? 'selected' : '' ?>>IPS</option>
+                            <option value="Bahasa Indonesia" <?= (isset($_GET['kategori']) && $_GET['kategori'] == 'Bahasa Indonesia') ? 'selected' : '' ?>>Bahasa Indonesia</option>
+                            <option value="Bahasa Inggris" <?= (isset($_GET['kategori']) && $_GET['kategori'] == 'Bahasa Inggris') ? 'selected' : '' ?>>Bahasa Inggris</option>
+                            <option value="Pemrograman" <?= (isset($_GET['kategori']) && $_GET['kategori'] == 'Pemrograman') ? 'selected' : '' ?>>Pemrograman</option>
+                            <option value="Desain" <?= (isset($_GET['kategori']) && $_GET['kategori'] == 'Desain') ? 'selected' : '' ?>>Desain</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 align-self-end">
+                        <button type="submit" class="btn btn-primary">Tampilkan</button>
+                    </div>
+                </form>
+            </div>
+
 
             <div class="row justify-content-md-center">
                 <?php if (!empty($list_kursus)) : ?>
@@ -90,12 +122,13 @@ if ($stmt2) {
                                         }
                                         ?>
                                     </p>
+                                    <p>Mentor : <?php echo $kursus['mentor'] ?></p>
                                     <div class="mt-auto d-flex justify-content-between align-items-center">
                                         <a href="<?php if (isset($_SESSION['username'])) {echo 'detail_kursus.php?id=' . $kursus['id_kursus'];} else {echo '../log in or register/login.php';} ?>" class="btn btn-sm btn-outline-primary course-button-detail">
                                             Pelajari <i class="bi bi-arrow-right-short"></i>
                                         </a>
                                         
-                                        <?php if (!in_array($kursus['id_kursus'], $list_kursus_dibeli)): ?>
+                                        <?php if (!in_array($kursus['id_kursus'], $list_kursus_dibeli) && (isset($_SESSION['role'])) ? $_SESSION['role'] === 'siswa' : false): ?>
                                         <form action="../keranjang_aksi.php" method="POST" style="margin-bottom: 0;">
                                             <input type="hidden" name="id_kursus" value="<?php echo $kursus['id_kursus']; ?>">
                                             <input type="hidden" name="nama_kursus" value="<?php echo htmlspecialchars($kursus['judul'] ?? 'Nama Kursus'); ?>">
