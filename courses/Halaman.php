@@ -13,7 +13,19 @@ if ($stmt) {
     }
     $stmt->close();
 }
-$conn->close();
+
+$id_siswa = $_SESSION['user_id'];
+$list_kursus_dibeli = [];
+$stmt2 = $conn->prepare("SELECT dp.id_kursus FROM pembelian p JOIN detail_pembelian dp ON p.id_pembelian = dp.id_pembelian WHERE p.id_siswa = ?");
+if ($stmt2) {
+    $stmt2->bind_param("i", $id_siswa);
+    $stmt2->execute();
+    $result = $stmt2->get_result();
+    while($row = $result->fetch_assoc()){
+        $list_kursus_dibeli[] = $row['id_kursus'];
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -23,6 +35,7 @@ $conn->close();
     <?php require '../komponen/nav.php'; // Pastikan nav.php memulai session jika belum ?>
 
     <main class="mt-2 pt-1">
+        
         <div class="container-fluid featured-courses" id="courses">
             <div style="text-align: center;" class="row justify-content-md-center">
                 <div class="col-md-9">
@@ -81,6 +94,8 @@ $conn->close();
                                         <a href="<?php if (isset($_SESSION['username'])) {echo 'detail_kursus.php?id=' . $kursus['id_kursus'];} else {echo '../log in or register/login.php';} ?>" class="btn btn-sm btn-outline-primary course-button-detail">
                                             Pelajari <i class="bi bi-arrow-right-short"></i>
                                         </a>
+                                        
+                                        <?php if (!in_array($kursus['id_kursus'], $list_kursus_dibeli)): ?>
                                         <form action="../keranjang_aksi.php" method="POST" style="margin-bottom: 0;">
                                             <input type="hidden" name="id_kursus" value="<?php echo $kursus['id_kursus']; ?>">
                                             <input type="hidden" name="nama_kursus" value="<?php echo htmlspecialchars($kursus['judul'] ?? 'Nama Kursus'); ?>">
@@ -91,6 +106,14 @@ $conn->close();
                                                 <i class="bi bi-cart-plus-fill"></i>
                                             </button>
                                         </form>
+                                        <?php else: ?>
+                                            <form style="margin-bottom: 0;">
+                                            <button class="btn btn-sm btn-secondary course-button-keranjang" title="Tambah ke Keranjang">
+                                                <i class="bi bi-cart-plus-fill"></i>
+                                            </button>
+                                            </form>
+                                        <?php endif; ?>
+                                        
                                     </div>
                                 </div>
                             </div>

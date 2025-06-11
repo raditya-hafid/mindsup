@@ -85,7 +85,7 @@ if (isset($_POST['bayar_sekarang'])) {
         unset($_SESSION['kode_kupon_aktif']);
         unset($_SESSION['diskon_persen_aktif']);
 
-        $stmt = mysqli_prepare($conn, "INSERT INTO `pembelian` (`id_siswa`, `status`, `tanggal_beli`, `items`, `pay_method`, `subtotal`, `discount_code`, `discount_persen`, `discount_amount`, `total`) VALUES (?, 'Sukses', ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = mysqli_prepare($conn, "INSERT INTO `pembelian` (`id_siswa`, `status`, `tanggal_beli`, `items`, `pay_method`, `subtotal`, `discount_code`, `discount_persen`, `discount_amount`, `total`) VALUES (?, 'Pending', ?, ?, ?, ?, ?, ?, ?, ?)");
         mysqli_stmt_bind_param($stmt, "isssisiii", $_SESSION['user_id'], $transaction['date'], $transaction['items'], $transaction['payment_method'], $transaction['subtotal'], $transaction['discount_code'], $transaction['discount_percentage'], $transaction['discount_amount'], $transaction['total']);
         mysqli_stmt_execute($stmt);
 
