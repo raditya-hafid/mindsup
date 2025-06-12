@@ -44,7 +44,7 @@ if ($stmt2) {
     <?php require '../komponen/sidebar.php'; ?>
     <?php require '../komponen/nav.php'; // Pastikan nav.php memulai session jika belum ?>
 
-    <main class="mt-2 pt-1">
+    <main class="mt-5 pt-4">
         
         <div class="container-fluid featured-courses" id="courses">
             <div style="text-align: center;" class="row justify-content-md-center">

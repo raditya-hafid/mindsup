@@ -1,47 +1,117 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
-require '../head/head.php';
+session_start();
 require '../komponen/koneksi.php';
 
-$id = $_GET["id"];
+$kursus = null;
+$id_kursus_valid = false;
 
-$stmt_kursus = mysqli_prepare($conn, "SELECT * FROM kursus WHERE id_kursus = ?");
-mysqli_stmt_bind_param($stmt_kursus, "i", $id);
-mysqli_stmt_execute($stmt_kursus);
-$result_kursus = mysqli_stmt_get_result($stmt_kursus);
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $id = (int)$_GET["id"];
+    $id_kursus_valid = true;
+
+    // Mengambil data kursus dan nama mentor
+    $stmt = mysqli_prepare($conn, "SELECT k.*, m.username AS nama_mentor FROM kursus k JOIN mentor m ON k.id_mentor = m.id_mentor WHERE k.id_kursus = ?");
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $kursus = mysqli_fetch_assoc($result);
+    } else {
+        $id_kursus_valid = false; // Kursus tidak ditemukan di database
+    }
+    mysqli_stmt_close($stmt);
+}
 ?>
+<!DOCTYPE html>
+<html lang="id">
+<?php require '../head/head.php'; ?>
+<body>
+    <?php require '../komponen/sidebar.php'; ?>
+    <?php require '../komponen/nav.php'; ?>
 
-    <body>
-        <?php
-            require '../komponen/sidebar.php';
-            require '../komponen/nav.php';
-            
+    <main class="mt-5 pt-4">
+        <div class="container">
+            <?php if ($kursus): ?>
+                <div class="row">
+                    <div class="col-lg-5 mb-4">
+                        <?php
+                        $final_image_src = '../asset/placeholder_image.png';
+                        $path_dari_db = $kursus['gambar'];
+                        if (!empty($path_dari_db)) {
+                            // Menghapus `../` jika ada untuk konsistensi
+                            $path_bersih = str_replace('../', '', $path_dari_db);
+                            $path_untuk_html = '../' . $path_bersih;
+                            $path_untuk_cek_server = realpath(__DIR__ . '/..') . '/' . $path_bersih;
 
-            if (mysqli_num_rows($result_kursus) === 1) {
-                $row = mysqli_fetch_assoc($result_kursus);
+                            if (file_exists($path_untuk_cek_server)) {
+                                $final_image_src = $path_untuk_html;
+                            }
+                        }
+                        ?>
+                        <img src="<?php echo htmlspecialchars($final_image_src); ?>" alt="Course Thumbnail" class="img-fluid rounded shadow-sm w-100">
+                    </div>
+                    <div class="col-lg-7">
+                        <h2><?php echo htmlspecialchars($kursus['judul']); ?></h2>
+                        <p class="lead"><?php echo nl2br(htmlspecialchars($kursus['deskripsi'])); ?></p>
+                        <hr>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td width="200"><b>Kategori</b></td>
+                                <td><?php echo htmlspecialchars($kursus['kategori']); ?></td>
+                            </tr>
+                            <tr>
+                                <td><b>Jenis Kursus</b></td>
+                                <td><?php echo htmlspecialchars($kursus['jenis_kursus']); ?></td>
+                            </tr>
+                            <tr>
+                                <td><b>Harga</b></td>
+                                <td>Rp <?php echo number_format($kursus['harga'], 0, ',', '.'); ?></td>
+                            </tr>
+                            <tr>
+                                <td><b>Penerbit/Mentor</b></td>
+                                <td><?php echo htmlspecialchars($kursus['nama_mentor']); ?></td>
+                            </tr>
+                        </table>
 
-                $final_image_src = '../asset/placeholder_image.png';
+                        <div class="mt-4 d-flex align-items-center">
+                            
+                            <a href="Halaman.php" class="btn btn-secondary me-3">
+                                <i class="bi bi-arrow-left"></i> Kembali
+                            </a>
 
-                if (!empty($row['gambar']) && file_exists($row['gambar'])) {
-                    $final_image_src = $row['gambar'];
-                }
+                            <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'siswa'): ?>
+                                <form action="../keranjang_aksi.php" method="POST" class="m-0">
+                                    <input type="hidden" name="action" value="tambah">
+                                    <input type="hidden" name="id_kursus" value="<?php echo $kursus['id_kursus']; ?>">
+                                    <input type="hidden" name="nama_kursus" value="<?php echo htmlspecialchars($kursus['judul']); ?>">
+                                    <input type="hidden" name="harga_kursus" value="<?php echo floatval($kursus['harga']); ?>">
+                                    <input type="hidden" name="gambar_kursus" value="<?php echo htmlspecialchars($path_dari_db); ?>">
+                                    <input type="hidden" name="dari_keranjang" value="true">
+                                    
+                                    <button type="submit" class="btn btn-success btn-lg">
+                                        <i class="bi bi-cart-plus-fill me-2"></i> Gabung Course
+                                    </button>
+                                </form>
+                            <?php elseif (!isset($_SESSION['role'])): ?>
+                                <a href="../log in or register/login.php" class="btn btn-success btn-lg">
+                                    <i class="bi bi-cart-plus-fill me-2"></i> Gabung Course
+                                </a>
+                            <?php endif; ?>
+                        </div>
+                        </div>
+                </div>
+            <?php else: ?>
+                <div class="alert alert-danger text-center">
+                    <h4>Kursus Tidak Ditemukan!</h4>
+                    <p>Maaf, kursus dengan ID yang Anda minta tidak ada atau telah dihapus.</p>
+                    <a href="Halaman.php" class="btn btn-secondary">Kembali ke Daftar Kursus</a>
+                </div>
+            <?php endif; ?>
+        </div>
+    </main>
 
-                echo "<div class=\"row\" style='margin-top: 70px;'>";
-                echo "<div class=\"col-3\"><img src='" . $final_image_src . "' alt='Uploaded Image' style='max-width: 100%;'></div>";
-                echo "<div class=\"col\"><table class=\"table\">";
-                echo "<tr><td width=\"200\"><p><b>Nama Course :</b></p></td><td><p>" . $row['judul'] . "</p></td></tr>";
-                echo "<tr><td class=\"teks-tabel\"><p><b>Deskripsi :</b></p></td><td><p>" . $row['deskripsi'] . "</p></td></tr>";
-                echo "<tr><td class=\"teks-tabel\"><p><b>Kategori :</b></p></td><td><p>" . $row['kategori'] . "</p></td></tr>";
-                echo "<tr><td class=\"teks-tabel\"><p><b>Jenis Kursus :</b></p></td><td><p>" . $row['jenis_kursus'] . "</p></td></tr>";
-                echo "<tr><td class=\"teks-tabel\"><p><b>Harga :</b></p></td><td><p>" . $row['harga'] . "</p></td></tr>";
-                echo "</table></div></div>";
-            } else {
-                echo "Course tidak ditemukan";
-            }
-
-        ?>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+    <div class="mt-5"><?php require '../komponen/footer.php'; ?></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
