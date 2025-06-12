@@ -58,7 +58,7 @@ if ($stmt2) {
                 <form method="GET" action="" class="row g-3">
                     <div class="col-md-4">
                         <label for="kategori" class="form-label">Filter Kategori Kursus</label>
-                        <select class="form-select" id="kategori" name="kategori">
+                        <select class="form-select" id="kategori" name="kategori" onchange="this.form.submit()">
                             <option value="">-- Semua Kategori --</option>
                             <option value="Matematika" <?= (isset($_GET['kategori']) && $_GET['kategori'] == 'Matematika') ? 'selected' : '' ?>>Matematika</option>
                             <option value="IPA" <?= (isset($_GET['kategori']) && $_GET['kategori'] == 'IPA') ? 'selected' : '' ?>>IPA</option>
@@ -69,11 +69,8 @@ if ($stmt2) {
                             <option value="Desain" <?= (isset($_GET['kategori']) && $_GET['kategori'] == 'Desain') ? 'selected' : '' ?>>Desain</option>
                         </select>
                     </div>
-                    <div class="col-md-2 align-self-end">
-                        <button type="submit" class="btn btn-primary">Tampilkan</button>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
             <div class="row">
                 <?php if (!empty($list_kursus)) : ?>
                     <?php foreach ($list_kursus as $kursus) : ?>
