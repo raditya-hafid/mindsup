@@ -1,5 +1,11 @@
 <?php
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../log in or register/login.php"); //
+    exit();
+}
+
 session_start();
+require '../head/head.php';
 require '../komponen/koneksi.php';
 
 $kursus = null;
