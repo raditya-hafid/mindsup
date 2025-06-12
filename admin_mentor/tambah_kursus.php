@@ -90,6 +90,12 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) || $_SESSION['role
                                     <input type="file" class="form-control" id="thumbnail_kursus" name="thumbnail_kursus" accept="image/png, image/jpeg, image/jpg" required>
                                     <small class="form-text text-muted">Format: JPG, JPEG, PNG. Ukuran maks: 2MB.</small>
                                 </div>
+
+                                <div class="mb-3">
+                                    <label for="materi_kursus" class="form-label fw-bold">Upload Materi Kursus</label>
+                                    <input type="file" class="form-control" id="materi_kursus" name="materi_kursus" accept=".mp4, .pdf, .txt" required>
+                                    <small class="form-text text-muted">Format: MP4, PDF, TXT. Ukuran maks: 10MB.</small>
+                                </div>
                                 
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                     <a href="dashboard_mentor.php" class="btn btn-outline-secondary me-md-2">Batal</a>

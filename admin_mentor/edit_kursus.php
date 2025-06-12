@@ -139,7 +139,7 @@ $metode_pembelajaran_tersimpan = !empty($kursus['metode_pembelajaran']) ? explod
                                 <div class="mb-3">
                                     <label for="materi_kursus" class="form-label fw-bold">Edit File Materi (Kosongkan jika tidak ingin ganti)</label>
                                     <input type="file" class="form-control" id="materi_kursus" name="materi_kursus" accept=".png, .jpeg, .jpg, .mp4, .pdf, .txt">
-                                    <small class="form-text text-muted">Ukuran maks: 10MB.</small>
+                                    <small class="form-text text-muted">Format: MP4, PDF, TXT. Ukuran maks: 10MB.</small>
                                     <?php if(!empty($kursus['file_materi']) && file_exists($kursus['file_materi'])): ?>
                                         <p class="mt-2">
                                             File materi saat ini : <br>

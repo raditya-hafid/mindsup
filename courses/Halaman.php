@@ -20,7 +20,18 @@ $list_kursus = [];
 while ($row = $result->fetch_assoc()) {
     $list_kursus[] = $row;
 }
-$stmt->close();
+
+$id_siswa = $_SESSION['user_id'];
+$list_kursus_dibeli = [];
+$stmt2 = $conn->prepare("SELECT dp.id_kursus FROM pembelian p JOIN detail_pembelian dp ON p.id_pembelian = dp.id_pembelian WHERE p.id_siswa = ?");
+if ($stmt2) {
+    $stmt2->bind_param("i", $id_siswa);
+    $stmt2->execute();
+    $result = $stmt2->get_result();
+    while($row = $result->fetch_assoc()){
+        $list_kursus_dibeli[] = $row['id_kursus'];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">

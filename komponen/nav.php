@@ -62,10 +62,10 @@ if (session_status() == PHP_SESSION_NONE) {
                               } elseif ($_SESSION['role'] === 'admin') {
                                     echo "<li><a class=\"dropdown-item\" href=\"../admin_mentor/dashboard_admin.php\"><i class=\"bi bi-speedometer2\"></i> Dashboard </a></li>";
                               } else {
-                                  echo "<li><a class=\"dropdown-item\" href=\"../dashboard/dashboard.php\"><i class=\"bi bi-speedometer2\"></i> Dashboard </a></li>";
-                              }
+                                    echo "<li><a class=\"dropdown-item\" href=\"../dashboard/dashboard.php\"><i class=\"bi bi-speedometer2\"></i> Dashboard </a></li>";
+                                    echo "<li><a class=\"dropdown-item\" href=\"../simulasi/keranjang.php\"><i class=\"bi bi-cart me-2\"></i> Keranjang</a></li>";
+                                }
                               
-                              echo "<li><a class=\"dropdown-item\" href=\"../simulasi/keranjang.php\"><i class=\"bi bi-cart me-2\"></i> Keranjang</a></li>";
                               echo "<li><hr class=\"dropdown-divider\"></li>";
                               echo "<li><a class=\"dropdown-item\" href=\"../log in or register/logout.php\"><i class=\"bi bi-box-arrow-right me-2\"></i> Log out </a></li>";
                           }else {

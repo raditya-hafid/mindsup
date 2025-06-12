@@ -124,6 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
         $harga_kursus = ($jenis_kursus == 'Berbayar' && isset($_POST['harga_kursus']) && is_numeric($_POST['harga_kursus'])) ? (float)$_POST['harga_kursus'] : 0;
         
         $thumbnail_path = uploadThumbnail('thumbnail_kursus');
+        $materi_path = uploadMateri('materi_kursus');
 
         if ($thumbnail_path === false) { // Ada error saat upload atau validasi gagal
             header("Location: tambah_kursus.php");
@@ -133,11 +134,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
              header("Location: tambah_kursus.php");
              exit();
         }
+
+        if ($materi_path === false) { // Ada error saat upload atau validasi gagal
+            header("Location: tambah_kursus.php");
+            exit();
+        } elseif ($materi_path === null) { // Wajib ada thumbnail saat create
+             $_SESSION['error_message'] = "Materi kursus wajib diupload.";
+             header("Location: tambah_kursus.php");
+             exit();
+        }
         
         $id_admin = 1;
-        $stmt = $conn->prepare("INSERT INTO `kursus`(`id_mentor`, `judul`, `kategori`, `harga`, `deskripsi`, `id_admin`, `jenis_kursus`, `gambar`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO `kursus`(`id_mentor`, `judul`, `kategori`, `harga`, `deskripsi`, `id_admin`, `jenis_kursus`, `gambar`, `file_materi`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
         if ($stmt) {
-            $stmt->bind_param("issisiss", $id_mentor_saat_ini, $judul_kursus, $kategori_materi, $harga_kursus, $deskripsi_kursus, $id_admin, $jenis_kursus, $thumbnail_path);
+            $stmt->bind_param("issisisss", $id_mentor_saat_ini, $judul_kursus, $kategori_materi, $harga_kursus, $deskripsi_kursus, $id_admin, $jenis_kursus, $thumbnail_path, $materi_path);
             if ($stmt->execute()) {
                 $_SESSION['success_message'] = "Kursus \"".htmlspecialchars($judul_kursus)."\" berhasil ditambahkan!";
             } else {
@@ -189,7 +199,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
             $final_thumbnail_path = $new_thumbnail_path; // Gunakan path baru
         }
 
-        $final_materi_path = $existing_thumbnail; // Default ke thumbnail lama
+        $final_materi_path = $existing_materi; // Default ke thumbnail lama
         // Hapus thumbnail lama jika ada dan path baru berhasil didapatkan dan berbeda
         if ($new_materi_path !== null && $new_materi_path !== $existing_materi) {
             @unlink($existing_materi); // @ untuk menekan error jika file tidak ada (meskipun sudah dicek)

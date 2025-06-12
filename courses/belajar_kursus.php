@@ -13,7 +13,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $id = (int)$_GET["id"];
     // Di sini Anda bisa menambahkan validasi apakah siswa ini benar-benar sudah membeli kursus tsb
     
-    $stmt = mysqli_prepare($conn, "SELECT judul, deskripsi FROM kursus WHERE id_kursus = ?");
+    $stmt = mysqli_prepare($conn, "SELECT judul, deskripsi, file_materi FROM kursus WHERE id_kursus = ?");
     mysqli_stmt_bind_param($stmt, "i", $id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
@@ -51,11 +51,13 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                                 <hr>
                                 <h5 class="card-title mt-4">Konten Pembelajaran</h5>
                                 <p><i>
-                                    <!-- (Di sini Anda bisa menambahkan video, teks materi, kuis, dll. sesuai struktur database materi Anda nantinya.) -->
+                                    <?php if (!empty($kursus['file_materi']) && file_exists($kursus['file_materi'])): ?>
+                                    <a href="<?php echo $kursus['file_materi']; ?>">File Materi</a>
+                                    <?php else : ?>
+                                    -
+                                    <?php endif; ?>
                                 </i></p>
-                                <div class="alert alert-info">
-                                    <!-- Konten materi kursus akan ditampilkan di area ini. -->
-                                </div>
+                                <div class="alert alert-info"></div>
                             </div>
                         </div>
 
