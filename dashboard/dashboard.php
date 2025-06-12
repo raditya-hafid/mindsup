@@ -42,14 +42,14 @@ if (mysqli_num_rows($result) > 0) {
         background: linear-gradient(to right, #007bff, #0056b3);
         /* Warna biru yang lebih soft */
         color: white;
-        padding: 30px 20px;
+        padding: 40px 20px;
         /* Padding sedikit dikurangi */
         margin-bottom: 30px;
         border-radius: 8px;
     }
 
     .dashboard-hero h1 {
-      margin-top: 1.2em;
+      /* margin-top: 1.2em; */
         font-size: 2.2rem;
         /* Ukuran font judul disesuaikan */
         
@@ -130,6 +130,10 @@ if (mysqli_num_rows($result) > 0) {
       /* margin-bottom: 5em; */
     }
 
+    .search a:hover {
+      background-color: #003366;
+    }
+
     
 
 </style>
@@ -138,7 +142,7 @@ if (mysqli_num_rows($result) > 0) {
     <?php require '../komponen/nav.php'; ?>
     <main class="mt-5 pt-4">
         <div class="container-fluid">
-            <div class="dashboard-hero text-center" style="background:linear-gradient(to right,#007bff,#0056b3);color:white;padding:30px 20px;margin-bottom:30px;border-radius:8px;">
+            <div class="dashboard-hero text-center" style="background:linear-gradient(to right,#007bff,#0056b3);color:white;">
                 <h1>Selamat Datang, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h1>
                 <p>Semoga aktivitas belajarmu menyenangkan.</p>
             </div>
@@ -187,7 +191,7 @@ if (mysqli_num_rows($result) > 0) {
                               <div class="imagesvg">
                                 <img src="../asset/learning.svg" class="img-fluid" width="180px" alt="">
                               </div>
-                              <div style="text-align: center; width: auto;" >
+                              <div class="search" style="text-align: center; width: auto;" >
                                 <a href="../courses/Halaman.php#courses" class="btn btn-lg btn-primary" style="border-radius: 20px;">
                                     <i class="bi bi-search me-2"></i>Jelajahi Kursus Sekarang
                                 </a>
