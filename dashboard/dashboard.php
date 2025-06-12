@@ -32,7 +32,7 @@ if (mysqli_num_rows($result) > 0) {
 <body>
     <?php require '../komponen/sidebar.php'; ?>
     <?php require '../komponen/nav.php'; ?>
-    <main class="mt-3 pt-2">
+    <main class="mt-5 pt-4">
         <div class="container-fluid">
             <div class="dashboard-hero" style="background:linear-gradient(to right,#007bff,#0056b3);color:white;padding:30px 20px;margin-bottom:30px;border-radius:8px;">
                 <h1>Selamat Datang, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h1>
