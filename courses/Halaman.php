@@ -41,16 +41,8 @@ $stmt->close();
                     <p class="my-2">
                         Temukan beragam kursus menarik yang telah kami siapkan untuk meningkatkan pengetahuan dan keahlian Anda!
                     </p>
-    <main class="mt-5 pt-3">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10 text-center">
-                    <h1>SEMUA KURSUS KAMI</h1>
-                    <hr>
-                    <p>Temukan beragam kursus menarik yang telah kami siapkan untuk meningkatkan pengetahuan dan keahlian Anda!</p>
                 </div>
-            </div>
-
+              </div>
             <div class="container mt-4 my-4">
                 <form method="GET" action="" class="row g-3">
                     <div class="col-md-4">
@@ -71,24 +63,6 @@ $stmt->close();
                     </div>
                 </form>
             </div>
-            <form method="GET" action="" class="row g-3 mt-3 mb-4">
-                <div class="col-md-5">
-                    <label for="kategori" class="form-label">Filter Kategori Kursus</label>
-                    <select class="form-select" id="kategori" name="kategori">
-                        <option value="">-- Semua Kategori --</option>
-                        <option value="Matematika" <?= ($kategori == 'Matematika') ? 'selected' : '' ?>>Matematika</option>
-                        <option value="IPA" <?= ($kategori == 'IPA') ? 'selected' : '' ?>>IPA</option>
-                        <option value="Bahasa Indonesia" <?= ($kategori == 'Bahasa Indonesia') ? 'selected' : '' ?>>Bahasa Indonesia</option>
-                        <option value="Bahasa Inggris" <?= ($kategori == 'Bahasa Inggris') ? 'selected' : '' ?>>Bahasa Inggris</option>
-                        <option value="Pemrograman" <?= ($kategori == 'Pemrograman') ? 'selected' : '' ?>>Pemrograman</option>
-                        <option value="Desain" <?= ($kategori == 'Desain') ? 'selected' : '' ?>>Desain</option>
-                    </select>
-                </div>
-                <div class="col-md-auto align-self-end">
-                    <button type="submit" class="btn btn-primary">Tampilkan</button>
-                </div>
-            </form>
-
             <div class="row">
                 <?php if (!empty($list_kursus)) : ?>
                     <?php foreach ($list_kursus as $kursus) : ?>
