@@ -116,7 +116,10 @@ if (isset($_POST['bayar_sekarang'])) {
     <?php require '../komponen/sidebar.php'; // Sesuaikan path ?>
 
     <div class="container mt-5 pt-5">
-        <h2 class="mb-4 text-center">Keranjang Belanja Anda</h2>
+        <h1 class="mb-4 text-center" style="color: #007bff;font-weight: bold; font-size: 3em;">Keranjang Belanja Anda</h1>
+        <div class="d-flex align-items-center justify-content-center">
+          <div style="height: 3px; width: 34%; background-color: #003366; text-align: center; margin-top: -3.2em;"></div>
+        </div>
 
         <?php if (isset($_SESSION['pesan_keranjang'])): ?>
             <div class="alert alert-info alert-dismissible fade show" role="alert">
@@ -136,8 +139,12 @@ if (isset($_POST['bayar_sekarang'])) {
 
 
         <?php if (empty($_SESSION['keranjang'])): ?>
-            <div class="alert alert-warning text-center" role="alert">
-                Keranjang Anda masih kosong. <a href="../courses/Halaman.php" class="alert-link">Mulai belanja sekarang!</a>
+          <div class="imagesvg text-center my-4">
+            <img src="../asset/nodata.svg" class="img-fluid" width="380px" alt="">
+          </div>
+            <div class="text-center mx-auto" style="margin-top: 3em; margin-bottom: 11em; width: 90%; max-width: 600px; padding: 10px; border-radius: 20px; background-color:  rgba(0, 123, 255, 0.3);" role="alert">
+              <span style="color: #003366; font-weight: bold;">Keranjang Anda masih kosong.</span>
+              <a href="../courses/Halaman.php" style="font-weight: bold; color: #003366;" class="alert-link"> Mulai belanja sekarang!</a>
             </div>
         <?php else: ?>
             <div class="row">

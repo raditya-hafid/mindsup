@@ -29,6 +29,18 @@ $stmt->close();
     <?php require '../komponen/sidebar.php'; ?>
     <?php require '../komponen/nav.php'; ?>
 
+    <main class="mt-2 pt-1">
+        
+        <div class="container-fluid featured-courses" id="courses">
+            <div style="text-align: center;" class="row justify-content-md-center">
+                <div class="col-md-9">
+                    <h1 style="margin-top: 1em;">SEMUA KURSUS KAMI</h1>
+                    <div class="d-flex align-items-center justify-content-center">
+                      <div style="height: 3px; width: 40%; background-color: #007bff; text-align: center; margin-top: -7px;"></div>
+                    </div>
+                    <p class="my-2">
+                        Temukan beragam kursus menarik yang telah kami siapkan untuk meningkatkan pengetahuan dan keahlian Anda!
+                    </p>
     <main class="mt-5 pt-3">
         <div class="container">
             <div class="row justify-content-center">
@@ -39,6 +51,26 @@ $stmt->close();
                 </div>
             </div>
 
+            <div class="container mt-4 my-4">
+                <form method="GET" action="" class="row g-3">
+                    <div class="col-md-4">
+                        <label for="kategori" class="form-label">Filter Kategori Kursus</label>
+                        <select class="form-select" id="kategori" name="kategori">
+                            <option value="">-- Semua Kategori --</option>
+                            <option value="Matematika" <?= (isset($_GET['kategori']) && $_GET['kategori'] == 'Matematika') ? 'selected' : '' ?>>Matematika</option>
+                            <option value="IPA" <?= (isset($_GET['kategori']) && $_GET['kategori'] == 'IPA') ? 'selected' : '' ?>>IPA</option>
+                            <option value="IPS" <?= (isset($_GET['kategori']) && $_GET['kategori'] == 'IPS') ? 'selected' : '' ?>>IPS</option>
+                            <option value="Bahasa Indonesia" <?= (isset($_GET['kategori']) && $_GET['kategori'] == 'Bahasa Indonesia') ? 'selected' : '' ?>>Bahasa Indonesia</option>
+                            <option value="Bahasa Inggris" <?= (isset($_GET['kategori']) && $_GET['kategori'] == 'Bahasa Inggris') ? 'selected' : '' ?>>Bahasa Inggris</option>
+                            <option value="Pemrograman" <?= (isset($_GET['kategori']) && $_GET['kategori'] == 'Pemrograman') ? 'selected' : '' ?>>Pemrograman</option>
+                            <option value="Desain" <?= (isset($_GET['kategori']) && $_GET['kategori'] == 'Desain') ? 'selected' : '' ?>>Desain</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 align-self-end">
+                        <button type="submit" class="btn btn-primary">Tampilkan</button>
+                    </div>
+                </form>
+            </div>
             <form method="GET" action="" class="row g-3 mt-3 mb-4">
                 <div class="col-md-5">
                     <label for="kategori" class="form-label">Filter Kategori Kursus</label>
