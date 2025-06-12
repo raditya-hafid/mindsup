@@ -57,7 +57,7 @@ if ($stmt2) {
                 </div>
             </div>
 
-            <div class="container mt-4">
+            <div class="container mt-4" style="margin-bottom: 25px;">
                 <form method="GET" action="" class="row g-3">
                     <div class="col-md-4">
                         <label for="kategori" class="form-label">Filter Kategori Kursus</label>

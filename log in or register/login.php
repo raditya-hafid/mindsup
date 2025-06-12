@@ -1,6 +1,6 @@
 <?php
 session_start();
-    if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
+    if (isset($_SESSION['role'])) {
         // Alihkan ke dashboard yang sesuai berdasarkan peran (role)
         if ($_SESSION['role'] === 'siswa') {
             header("Location: ../dashboard/dashboard.php"); //
