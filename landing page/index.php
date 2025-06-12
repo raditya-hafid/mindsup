@@ -1,7 +1,7 @@
 !<!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Landing Page</title>
+    <title>Minds UP</title>
     <style>
       body{
         overflow-x: hidden;
