@@ -137,13 +137,8 @@
               
               // Logika untuk menampilkan gambar dengan benar
               $final_image_src = '../asset/placeholder_image.png';
-              if (!empty($kursus['gambar'])) {
-                  $path_bersih = str_replace('../', '', $kursus['gambar']);
-                  $path_untuk_html = '../' . $path_bersih;
-                  $path_untuk_cek = realpath(__DIR__ . '/..') . '/' . $path_bersih;
-                  if (file_exists($path_untuk_cek)) {
-                      $final_image_src = $path_untuk_html;
-                  }
+              if (!empty($kursus['gambar']) && file_exists($kursus['gambar'])) {
+                $final_image_src = $kursus['gambar'];
               }
               
               echo '    <img src="' . htmlspecialchars($final_image_src) . '" class="card-img-top" alt="Course Cover" style="height: 200px; object-fit: cover;">';
