@@ -79,7 +79,7 @@ if ($stmt2) {
                             ?>
                             <a href="<?php echo $kembali_link; ?>" class="btn btn-secondary me-3"><i class="bi bi-arrow-left"></i> Kembali</a>
 
-                            <?php if ($source === 'dashboard' || ($_SESSION['role'] === "siswa" && in_array($kursus['id_kursus'], $list_kursus_dibeli ?? []))): // Jika datang dari dashboard, tampilkan tombol "Pelajari" ?>
+                            <?php if (($source === 'dashboard' || $_SESSION['role'] === "siswa") && in_array($kursus['id_kursus'], $list_kursus_dibeli ?? [])): // Jika datang dari dashboard, tampilkan tombol "Pelajari" ?>
                                 <a href="belajar_kursus.php?id=<?php echo $kursus['id_kursus']; ?>" class="btn btn-primary btn-lg">
                                     <i class="bi bi-play-circle-fill me-2"></i> Pelajari Course
                                 </a>
