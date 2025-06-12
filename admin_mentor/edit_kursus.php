@@ -73,6 +73,7 @@ $metode_pembelajaran_tersimpan = !empty($kursus['metode_pembelajaran']) ? explod
                                 <input type="hidden" name="action" value="update">
                                 <input type="hidden" name="id_kursus" value="<?php echo $id_kursus_CRUD; ?>">
                                 <input type="hidden" name="existing_thumbnail" value="<?php echo htmlspecialchars($kursus['gambar']); ?>">
+                                <input type="hidden" name="existing_materi" value="<?php echo htmlspecialchars($kursus['file_materi']); ?>">
                                 
                                 <div class="mb-3">
                                     <label for="judul_kursus" class="form-label fw-bold">Nama Course</label>
@@ -89,7 +90,7 @@ $metode_pembelajaran_tersimpan = !empty($kursus['metode_pembelajaran']) ? explod
                                         <?php 
                                         $kategori_options = ["Matematika", "IPA", "IPS", "Bahasa Indonesia", "Bahasa Inggris", "Pemrograman", "Desain"];
                                         foreach($kategori_options as $kat_opt){
-                                            $selected = ($kursus['kategori_materi'] == $kat_opt) ? 'selected' : '';
+                                            $selected = ($kursus['kategori'] == $kat_opt) ? 'selected' : '';
                                             echo "<option value=\"$kat_opt\" $selected>$kat_opt</option>";
                                         }
                                         ?>
@@ -123,14 +124,29 @@ $metode_pembelajaran_tersimpan = !empty($kursus['metode_pembelajaran']) ? explod
                                     <label for="harga_kursus" class="form-label fw-bold">Harga Kursus (Rp)</label>
                                     <input type="number" class="form-control" id="harga_kursus" name="harga_kursus" min="0" placeholder="Isi jika jenis kursus berbayar" value="<?php echo htmlspecialchars($kursus['harga']); ?>">
                                 </div>
+
                                 <div class="mb-3">
                                     <label for="thumbnail_kursus" class="form-label fw-bold">Upload Thumbnail Baru (Kosongkan jika tidak ingin ganti)</label>
                                     <input type="file" class="form-control" id="thumbnail_kursus" name="thumbnail_kursus" accept="image/png, image/jpeg, image/jpg">
                                     <small class="form-text text-muted">Format: JPG, JPEG, PNG. Ukuran maks: 2MB.</small>
-                                    <?php if(!empty($kursus['thumbnail_kursus']) && file_exists($kursus['thumbnail_kursus'])): ?>
-                                        <p class="mt-2">Thumbnail saat ini: <br><img src="<?php echo htmlspecialchars($kursus['thumbnail_kursus']); ?>" alt="Thumbnail Saat Ini" style="max-width: 200px; max-height: 150px; border-radius: .25rem; margin-top: 5px;"></p>
-                                    <?php elseif(!empty($kursus['thumbnail_kursus'])): ?>
-                                        <p class="mt-2 text-danger">Thumbnail saat ini tidak dapat ditemukan: <?php echo htmlspecialchars($kursus['thumbnail_kursus']); ?></p>
+                                    <?php if(!empty($kursus['gambar']) && file_exists($kursus['gambar'])): ?>
+                                        <p class="mt-2">Thumbnail saat ini: <br><img src="<?php echo htmlspecialchars($kursus['gambar']); ?>" alt="Thumbnail Saat Ini" style="max-width: 200px; max-height: 150px; border-radius: .25rem; margin-top: 5px;"></p>
+                                    <?php elseif(!empty($kursus['gambar'])): ?>
+                                        <p class="mt-2 text-danger">Thumbnail saat ini tidak dapat ditemukan: <?php echo htmlspecialchars($kursus['gambar']); ?></p>
+                                    <?php endif; ?>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="materi_kursus" class="form-label fw-bold">Edit File Materi (Kosongkan jika tidak ingin ganti)</label>
+                                    <input type="file" class="form-control" id="materi_kursus" name="materi_kursus" accept=".png, .jpeg, .jpg, .mp4, .pdf, .txt">
+                                    <small class="form-text text-muted">Format: MP4, PDF, TXT. Ukuran maks: 10MB.</small>
+                                    <?php if(!empty($kursus['file_materi']) && file_exists($kursus['file_materi'])): ?>
+                                        <p class="mt-2">
+                                            File materi saat ini : <br>
+                                            <a href="<?php echo $kursus['file_materi']; ?>">File Materi</a>
+                                        </p>
+                                    <?php elseif(!empty($kursus['file_materi'])): ?>
+                                        <p class="mt-2 text-danger">File materi saat ini tidak dapat ditemukan: <?php echo htmlspecialchars($kursus['gambar']); ?></p>
                                     <?php endif; ?>
                                 </div>
                                 

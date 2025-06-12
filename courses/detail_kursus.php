@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../log in or register/login.php"); //
+    exit();
+}
+
+require '../head/head.php';
 require '../komponen/koneksi.php';
 
 $kursus = null;
@@ -15,6 +22,18 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $kursus = mysqli_fetch_assoc($result);
     }
     mysqli_stmt_close($stmt);
+}
+
+$id_siswa = $_SESSION['user_id'];
+$list_kursus_dibeli = [];
+$stmt2 = $conn->prepare("SELECT dp.id_kursus FROM pembelian p JOIN detail_pembelian dp ON p.id_pembelian = dp.id_pembelian WHERE p.id_siswa = ?");
+if ($stmt2) {
+    $stmt2->bind_param("i", $id_siswa);
+    $stmt2->execute();
+    $result = $stmt2->get_result();
+    while($row = $result->fetch_assoc()){
+        $list_kursus_dibeli[] = $row['id_kursus'];
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -60,7 +79,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                             ?>
                             <a href="<?php echo $kembali_link; ?>" class="btn btn-secondary me-3"><i class="bi bi-arrow-left"></i> Kembali</a>
 
-                            <?php if ($source === 'dashboard'): // Jika datang dari dashboard, tampilkan tombol "Pelajari" ?>
+                            <?php if ($source === 'dashboard' || ($_SESSION['role'] === "siswa" && in_array($kursus['id_kursus'], $list_kursus_dibeli ?? []))): // Jika datang dari dashboard, tampilkan tombol "Pelajari" ?>
                                 <a href="belajar_kursus.php?id=<?php echo $kursus['id_kursus']; ?>" class="btn btn-primary btn-lg">
                                     <i class="bi bi-play-circle-fill me-2"></i> Pelajari Course
                                 </a>
