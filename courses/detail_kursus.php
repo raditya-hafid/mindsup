@@ -43,7 +43,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     }
     
     // 3. Ambil semua ulasan untuk kursus ini
-    $stmt_ulasan = mysqli_prepare($conn, "SELECT dp.ulasan, s.username FROM detail_pembelian dp JOIN pembelian p ON dp.id_pembelian = p.id_pembelian JOIN siswa s ON p.id_siswa = s.id_siswa WHERE dp.id_kursus = ? AND dp.ulasan IS NOT NULL AND dp.ulasan != ''");
+    $stmt_ulasan = mysqli_prepare($conn, "SELECT dp.ulasan, dp.Rating, s.username FROM detail_pembelian dp JOIN pembelian p ON dp.id_pembelian = p.id_pembelian JOIN siswa s ON p.id_siswa = s.id_siswa WHERE dp.id_kursus = ? AND dp.ulasan IS NOT NULL AND dp.ulasan != ''");
     mysqli_stmt_bind_param($stmt_ulasan, "i", $id_kursus);
     mysqli_stmt_execute($stmt_ulasan);
     $result_ulasan = mysqli_stmt_get_result($stmt_ulasan);
@@ -113,6 +113,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                             <div class="card mb-3">
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo htmlspecialchars($ulasan['username']); ?></h5>
+                                    <p class="card-text"><?php for($i = 0; $i < $ulasan['Rating']; $i++) {echo "★";} ?></p>
                                     <p class="card-text"><?php echo nl2br(htmlspecialchars($ulasan['ulasan'])); ?></p>
                                 </div>
                             </div>

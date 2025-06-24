@@ -15,13 +15,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $id_detail = (int)$_POST['id_detail'];
     $ulasan = trim($_POST['ulasan']);
+    $rating = (int)$_POST['rating'];
     $id_siswa = $_SESSION['user_id'];
 
     // Query UPDATE untuk menyimpan ulasan ke kolom 'ulasan'
     // Pastikan hanya pemilik ulasan yang bisa mengubahnya
-    $sql = "UPDATE detail_pembelian dp JOIN pembelian p ON dp.id_pembelian = p.id_pembelian SET dp.ulasan = ? WHERE dp.id_detail = ? AND p.id_siswa = ?";
+    $sql = "UPDATE detail_pembelian dp JOIN pembelian p ON dp.id_pembelian = p.id_pembelian SET dp.ulasan = ?, dp.Rating = ? WHERE dp.id_detail = ? AND p.id_siswa = ?";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "sii", $ulasan, $id_detail, $id_siswa);
+    mysqli_stmt_bind_param($stmt, "siii", $ulasan, $rating, $id_detail, $id_siswa);
 
     if (mysqli_stmt_execute($stmt)) {
         // Jika berhasil, redirect kembali ke halaman detail kursus dengan pesan sukses

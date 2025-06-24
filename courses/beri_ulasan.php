@@ -46,6 +46,16 @@ $data_ulasan = mysqli_fetch_assoc($result);
                         <form action="proses_ulasan.php" method="POST">
                             <input type="hidden" name="id_detail" value="<?php echo $id_detail; ?>">
                             
+                            <div class="mb-3">Beri Rating:</div>
+                            <div class="rating d-flex justify-content-start gap-1">
+                                <?php for ($i = 1; $i <= 5; $i++): ?>
+                                    <input type="radio" name="rating" id="b<?= $i ?>" value="<?= $i ?>" class="btn-check" required>
+                                    <label class="btn btn-outline-warning" for="b<?= $i ?>">★</label>
+                                <?php endfor; ?>
+                            </div>
+
+                            <br>
+                            
                             <div class="mb-3">
                                 <label for="ulasan" class="form-label">Komentar / Ulasan Anda</label>
                                 <textarea name="ulasan" id="ulasan" class="form-control" rows="5" required placeholder="Tuliskan pengalaman belajar Anda di sini..."><?php echo htmlspecialchars($data_ulasan['ulasan'] ?? ''); ?></textarea>
